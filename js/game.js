@@ -10,4 +10,4 @@ let config ={
 };
 
 //create a new game, pass the configuration
-let game = new phaser.Game(config);
+let game = new Phaser.Game(config);
