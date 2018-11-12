@@ -4,12 +4,33 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <link rel="stylesheet" href="main.css" type="text/css" media="screen">
   <title>Running Game</title>
 </head>
 <body>
-<p>&copy;2018 WebUp</p>
+  <main>
+    <div class="wrapper">
+      <div id="menu" class="main1">
+     <div id="main1">
+       <h1>Kandi Runner</h1>
+       <ul>
+         <li><a href="#" class="button play">Start Game</a></li>
+         <li><a href="#" class="button credits">Credits</a></li>
+       </ul>
+     </div>
+   </div>
+      <canvas id="canvas" width="800" height="480">
+        <p>You're browser does not support the required functionality to play this game.</p>
+        <p>Please update to a modern browser such as <a href="www.google.com/chrome/‎">Google Chrome</a> to play.</p>
+      </canvas>
+    </div>
+  </main>
 
-    <script src="js/phaser.min.js"></script>
-    <script src="js/game.js"></script>
+  <footer class="footer">
+    <p>&copy;2018 WebUp</p>
+  </footer>
+
+  <script type="text/javascript" src="js/phaser.min.js"></script>
+  <script type="text/javascript" src="js/game.js"></script>
 </body>
 </html>
