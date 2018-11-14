@@ -1,84 +1,90 @@
-var config = {
-       type: Phaser.AUTO,
-       width: 1200,
-       height: 600,
-       physics: {
-           default: 'arcade',
-           arcade: {
-               gravity: { y: 200 }
-           }
-       },
-       scene: {
-           preload: preload,
-           create: create
+let config = {
+     type: Phaser.AUTO,
+     width: window.innerWidth,
+     height: window.innerHeight,
+     physics: {
+       default: 'arcade',
+       arcade: {
+         gravity: { y: 200 },
+         debug: false
        }
-   };
+     },
+     scene: {
+       preload: preload,
+       create: create,
+       update: update
+     }
+ };
 
-   var game = new Phaser.Game(config);
+let game = new Phaser.Game(config);
 
-   function preload ()
-   {
-       // this.load.setBaseURL('http://labs.phaser.io');
-       //
+function preload () {
+   this.load.image('sky', 'assets/sky4.png');
+   this.load.image('ground', 'assets/platform.png');
+   this.load.spritesheet('dude','assets/dude.png',
+    { frameWidth: 32, frameHeight: 48 });
+}
 
-       this.load.image('sky', 'assets/sky4.png');
-       this.load.image('logo', 'assets/slimeeyes.png');
-       this.load.image('red', 'assets/bubble.png');
+function create () {
+  ///=========================SKY=======================///
+  this.add.image(window.innerWidth/2, window.innerHeight/2, 'sky').setScale(2);
 
-       // this.load.image('sky', 'assets/skies/sky4.png');
-       // this.load.image('logo', 'assets/sprites/slimeeyes.png');
-       // this.load.image('red', 'assets/particles/bubble.png');
-       // this.load.image('background', 'assets/background.png');
+  ///=========================Player=======================///
+    player = this.physics.add.sprite(100, 450, 'dude');
+    player.setBounce(1);
+    player.setCollideWorldBounds(true);
+    player.body.setGravityY(300);
+    this.anims.create({
+     key: 'left',
+     frames: this.anims.generateFrameNumbers('dude', { start: 0, end: 3 }),
+     frameRate: 10,
+     repeat: -1
+    });
+    this.anims.create({
+     key: 'turn',
+     frames: [ { key: 'dude', frame: 4 } ],
+     frameRate: 20
+   });
+    this.anims.create({
+     key: 'right',
+     frames: this.anims.generateFrameNumbers('dude', { start: 5, end: 8 }),
+     frameRate: 10,
+     repeat: -1
+    });
+   ///=========================Ground=======================///
 
-   }
+   platforms = this.physics.add.staticGroup();
+   platforms.create(window.innerWidth/2, window.innerHeight, 'ground').setScale(4).refreshBody();
+   platforms.body.inmovable = true;
 
-   function create ()
-   {
-      // this.add.image(400, 300, 'background');
-       this.add.image(600, 300, 'sky');
-       // sky.setScale(1,2);
+   game.physics.startSystem(Phaser.Physics.ARCADE);
+   game.physics.arcade.enable([player, platforms])
+   // platforms.setCollideWorldBounds(true);
 
-       var particles = this.add.particles('red');
-
-       var emitter = particles.createEmitter({
-           speed: 100,
-           scale: { start: 1, end: 0 },
-           blendMode: 'ADD'
-       });
-
-       var logo = this.physics.add.image(300, 100, 'logo');
-
-       logo.setVelocity(100, 200);
-       logo.setBounce(1, 1);
-       logo.setCollideWorldBounds(true);
-
-       emitter.startFollow(logo);
-   }
+ }
 
 
-//Create a new Game Scene
-// let gameScene = new Phaser.Scene('Game');
-//
-//
-// // load Images
-// gameScene.preload = function(){
-//   //the name can be anything, then the path name of where that images is found
-//   this.load.image('background', 'imgs/background.png');
-//   this.load.image('background', 'imgs/player.png');
-// };
-//
-// //called once after the preload ends
-// gameScene.create = function(){
-//   this.add.sprite(0,0, 'background');
-// }
-// // set the configuration of the game
-// let config ={
-//   type:Phaser.Auto,
-//   width: 600,
-//   height: 360,
-//   margin: 0,
-//   scene: gameScene
-// };
-//
-// //create a new game, pass the configuration
-// let game = new Phaser.Game(config);
+ // cursors = this.input.keyboard.createCursorKeys();
+
+function update () {
+  this.game.physics.arcade.collide(this.player, this.platforms);
+
+  // this.physics.add.collider(player, platforms);
+
+  // if (cursors.left.isDown) {
+  //     player.setVelocityX(-160);
+  //     player.anims.play('left', true);
+  // }
+  // else if (cursors.right.isDown) {
+  //     player.setVelocityX(160);
+  //     player.anims.play('right', true);
+  // }
+  // else {
+  //     player.setVelocityX(0);
+  //     player.anims.play('turn');
+  // }
+  // if (cursors.up.isDown && player.body.touching.down)
+  // {
+  //     player.setVelocityY(-330);
+  // }
+}
