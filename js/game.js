@@ -10,10 +10,16 @@ let config = {
          debug: false
        }
      },
+     parent: 'phaser-example',
      scene: [ Start, PlayGame ]
  };
+ let background;
  let player;
  let platforms;
  let cursors;
- 
+ let score = 0;
+ let scoreText;
+ let timer = 0;
+ let iter = 0;
+
  let game = new Phaser.Game(config);
