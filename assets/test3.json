@@ -1,0 +1,14 @@
+{ "columns":4,
+ "image":"svg\/grasstile.svg",
+ "imageheight":202,
+ "imagewidth":634,
+ "margin":2,
+ "name":"gr01",
+ "spacing":2,
+ "tilecount":4,
+ "tiledversion":"1.2.1",
+ "tileheight":128,
+ "tilewidth":128,
+ "type":"tileset",
+ "version":1.2
+}
