@@ -14,6 +14,7 @@ let config = {
      scene: [ Start, PlayGame ]
  };
  let background;
+ let cloud1;
  let player;
  let platforms;
  let cursors;
@@ -21,5 +22,7 @@ let config = {
  let scoreText;
  let timer = 0;
  let iter = 0;
+ let soundFX;
+ let startButton;
 
  let game = new Phaser.Game(config);

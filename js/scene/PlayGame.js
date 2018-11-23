@@ -1,19 +1,28 @@
-class PlayGame extends Phaser.Scene {
+ class PlayGame extends Phaser.Scene {
   constructor(){
     super({key: "PlayGame"});
   }
 
 
 preload () {
-     this.load.image('background', 'assets/background.png');
-     this.load.image('ground', 'assets/platform.png');
-     this.load.spritesheet('dude','assets/dude.png',
+    this.load.audio('gameAudio', ['assets/GFS.mp3']);
+    this.load.image('background', 'assets/background.png');
+    this.load.image('cloud1', 'assets/Export/cloud1.png');
+    this.load.image('ground', 'assets/platform.png');
+    this.load.spritesheet('dude','assets/dude.png',
       { frameWidth: 32, frameHeight: 48 });
   }
 
 create () {
+
+  soundFX = this.sound.add("gameAudio", { loop: "true"});
+  soundFX.play();
+
     ///=========================SKY=======================///
     background = this.add.tileSprite(window.innerWidth/2, window.innerHeight/2, window.innerWidth/2, window.innerHeight/2, 'background').setScale(2);
+
+    cloud1 = this.add.tileSprite(600, 300, 2500, 1000, 'cloud1');
+
 
     ///=========================Player=======================///
       player = this.physics.add.sprite(100, 450, 'dude');
@@ -28,14 +37,20 @@ create () {
        frameRate: 10,
        repeat: -1
      });
+     // added new in 23-11-2018,, (Left side)
+     this.anims.create({
+      key: 'left',
+      frames: this.anims.generateFrameNumbers('dude', { start: 5, end: 8 }),
+      frameRate: 10,
+      repeat: -1
+    });
 
      ///=========================Ground=======================///
      platforms = this.physics.add.staticGroup();
      platforms.create(window.innerWidth/2, window.innerHeight, 'ground').setScale(4).refreshBody();
 
      ///========================= Score =======================///
-     // Store the score in a variable, initialized at 0
-     // // The style of the text
+     // The style of the text
      let style = { font: '20px Arial', fill: '#fff', backgroundColor: 'black'};
      // Display the score in the top left corner
      // Parameters: x position, y position, text, style
@@ -46,21 +61,25 @@ create () {
    }
 
 update () {
-  background.tilePositionX = (iter) * -800;
+  background.tilePositionX = (iter) * -400;
+  cloud1.tilePositionX = (iter) * -400;
   iter -=0.01;
     this.physics.add.collider(player, platforms);
     if (cursors.right.isDown) {
         player.anims.play('right', true);
         player.x += 3;
 
-    } else if(!cursors.left.isDown){
-        player.anims.play('right', false);
-    } else if (cursors.right.isDown) {
-        player.setVelocityX(160);
-        player.anims.play('right', true);
-    } else {
-        player.setVelocityX(0);
-        player.anims.play('turn');
+    } else if(cursors.left.isDown){
+        player.anims.play('left', true);
+        player.x -= 3;
+        //====== old code before 23-11-2018 =====
+    // } else if (cursors.left.isDown) {
+    //     player.setVelocityX(160);
+    //     player.anims.play('left', true);
+    // } else {
+    //     player.setVelocityX(0);
+    //     player.anims.play('turn');
+    
     }
     if ((cursors.up.isDown || cursors.space.isDown) && player.body.touching.down && timer < 330)
        {  player.body.velocity.y = -330;    }
