@@ -10,27 +10,41 @@ class Start extends Phaser.Scene {
     this.load.image('start', 'assets/startGame.gif');
   }
 
+
+
+
+
+
+
   create(){
-    soundFX = this.sound.add("startAudio", { loop: "true"});
-    soundFX.play();
+
+    ///=========================AUDIO=======================///
+    // soundFX = this.sound.add("startAudio", { loop: "true"});
+    // soundFX.play();
+
+    ///=========================Background=======================///
+    bg = this.add.tileSprite(window.innerWidth/2,window.innerHeight/2, window.innerWidth/2,window.innerHeight/2, 'bg').setScale(2);
+
+    ///=========================Auto resize=======================///
+
+    window.addEventListener('resize', resize);
+    resize();
+    function resize() {
+        var canvas = game.canvas, width = window.innerWidth, height = window.innerHeight;
+        var wratio = width / height, ratio = canvas.width / canvas.height;
+
+        if (wratio < ratio) {
+            canvas.style.width = width + "px";
+            canvas.style.height = (width / ratio) + "px";
+        } else {
+            canvas.style.width = (height * ratio) + "px";
+            canvas.style.height = height + "px";
+        }
+    };
 
 
-
-    this.bg = this.add.sprite(0,0, 'bg').setOrigin(0);
-    this.bg.width=this.width;
-
-    // startButton= this.add.sprite(this.world.centerX, this.world.centerY,'start');
-    // console.log(this.game.world, "=====this world====")
-    // console.log(this.game.worldToTileX, "=====this.game.world====")
-    // console.log(this.game, "=====this.world====")
-
-
-    // startButton.anchor.setTo(0.5);
-
-
-
-
-    this.startButton= this.add.image(400,300,'start');
+    ///=========================Button=======================///
+    this.startButton = this.add.image(window.innerWidth/2,window.innerHeight/2,'start').setScale(1);
     this.startButton.setInteractive();
     this.input.on('gameobjectdown', this.onObjectClicked)
     }
@@ -40,7 +54,7 @@ class Start extends Phaser.Scene {
     else soundFX.resume();
     }
 
-  update(delta){
+  update(){
 
   }
 }
