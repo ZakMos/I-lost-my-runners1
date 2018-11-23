@@ -5,7 +5,7 @@
 
 
 preload () {
-    this.load.audio('gameAudio', ['assets/GFS.mp3']);
+    this.load.audio('gameAudio', ['assets/audio/game.mp3']);
     this.load.image('background', 'assets/background.png');
     this.load.image('cloud1', 'assets/Export/cloud1.png');
     this.load.image('ground', 'assets/platform.png');
@@ -79,7 +79,7 @@ update () {
     // } else {
     //     player.setVelocityX(0);
     //     player.anims.play('turn');
-    
+
     }
     if ((cursors.up.isDown || cursors.space.isDown) && player.body.touching.down && timer < 330)
        {  player.body.velocity.y = -330;    }

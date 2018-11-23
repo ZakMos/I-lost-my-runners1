@@ -5,7 +5,7 @@ class Start extends Phaser.Scene {
   }
 
   preload(){
-    this.load.audio('startAudio', ['assets/startAudio.mp3']);
+    this.load.audio('startAudio', ['assets/audio/startAudio.mp3']);
     this.load.image('bg', 'assets/back01.jpeg');
     this.load.image('start', 'assets/startGame.gif');
   }
