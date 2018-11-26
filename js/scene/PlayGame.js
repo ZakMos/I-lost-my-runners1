@@ -13,10 +13,9 @@ preload () {
 
 create () {
     ///=========================SKY=======================///
-    this.add.image(window.innerWidth/2, window.innerHeight/2, 'background').setScale(2);
+    background = this.add.tileSprite(window.innerWidth/2, window.innerHeight/2, window.innerWidth/2, window.innerHeight/2, 'background').setScale(2);
 
     ///=========================Player=======================///
-
       player = this.physics.add.sprite(100, 450, 'dude');
       player.setBounce(0.2);
       player.setCollideWorldBounds(true);
@@ -29,28 +28,27 @@ create () {
        frameRate: 10,
        repeat: -1
      });
-     ///=========================Ground=======================///
 
+     ///=========================Ground=======================///
      platforms = this.physics.add.staticGroup();
      platforms.create(window.innerWidth/2, window.innerHeight, 'ground').setScale(4).refreshBody();
 
+     ///========================= Score =======================///
      // Store the score in a variable, initialized at 0
-     this.score = 0;
-
      // // The style of the text
      let style = { font: '20px Arial', fill: '#fff', backgroundColor: 'black'};
-
      // Display the score in the top left corner
      // Parameters: x position, y position, text, style
-     this.scoreText = this.add.text(20, 20, 'score: ' + this.score, style);
+     scoreText = this.add.text(20, 20, 'score: ' + score, style);
+
+     ///========================= Cursors =======================///
      cursors = this.input.keyboard.createCursorKeys();
    }
 
-
-
 update () {
+  background.tilePositionX = (iter) * -800;
+  iter -=0.01;
     this.physics.add.collider(player, platforms);
-
     if (cursors.right.isDown) {
         player.anims.play('right', true);
         player.x += 3;
@@ -64,7 +62,8 @@ update () {
         player.setVelocityX(0);
         player.anims.play('turn');
     }
-    if (cursors.up.isDown || cursors.space.isDown && player.body.touching.down)
-    {  player.setVelocityY(-330); }
+    if ((cursors.up.isDown || cursors.space.isDown) && player.body.touching.down && timer < 330)
+       {  player.body.velocity.y = -330;    }
+
   };
 }
