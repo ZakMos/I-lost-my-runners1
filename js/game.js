@@ -1,6 +1,5 @@
 let config = {
      type: Phaser.AUTO,
-
      width: window.innerWidth,
      height: window.innerHeight,
      physics: {
@@ -13,16 +12,16 @@ let config = {
      parent: 'phaser-example',
      scene: [ Start, PlayGame ]
  };
- let background;
- let cloud1;
- let player;
- let platforms;
- let cursors;
- let score = 0;
- let scoreText;
- let timer = 0;
- let iter = 0;
- let soundFX;
- let startButton;
+  let soundFX;
+  let bg;
+  let startButton;
+  let cloud1;
+  let player;
+  let platforms;
+  let cursors;
+  let score = 0;
+  let scoreText;
+  let timer = 0;
+  let iter = 0;
 
- let game = new Phaser.Game(config);
+let game = new Phaser.Game(config);

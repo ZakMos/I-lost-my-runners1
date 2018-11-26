@@ -15,11 +15,13 @@ preload () {
 
 create () {
 
-  soundFX = this.sound.add("gameAudio", { loop: "true"});
-  soundFX.play();
+  ///=========================AUDIO=======================///
+  // soundFX = this.sound.add("gameAudio", { loop: "true"});
+  // soundFX.play();
 
     ///=========================SKY=======================///
-    background = this.add.tileSprite(window.innerWidth/2, window.innerHeight/2, window.innerWidth/2, window.innerHeight/2, 'background').setScale(2);
+    // background = this.add.tileSprite(0, 0,  'background').setScale(2);
+    bg = this.add.tileSprite(window.innerWidth/2, window.innerHeight/2, window.innerWidth/2, window.innerHeight/2, 'background').setScale(2);
 
     cloud1 = this.add.tileSprite(600, 300, 2500, 1000, 'cloud1');
 
@@ -61,7 +63,7 @@ create () {
    }
 
 update () {
-  background.tilePositionX = (iter) * -400;
+  bg.tilePositionX = (iter) * -400;
   cloud1.tilePositionX = (iter) * -400;
   iter -=0.01;
     this.physics.add.collider(player, platforms);
