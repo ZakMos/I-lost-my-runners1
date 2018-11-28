@@ -10,12 +10,6 @@ class Start extends Phaser.Scene {
     this.load.image('start', 'assets/startGame.gif');
   }
 
-
-
-
-
-
-
   create(){
 
     ///=========================AUDIO=======================///
@@ -41,6 +35,9 @@ class Start extends Phaser.Scene {
             canvas.style.height = height + "px";
         }
     };
+
+    ///=========================Rules =======================///
+    rule = this.add.text(window.innerWidth/2*0.93, 440, 'Rule' ,  { font: '20px Arial', boundsAlignH: "center", fill: '#fff', backgroundColor: 'black'});
 
 
     ///=========================Button=======================///

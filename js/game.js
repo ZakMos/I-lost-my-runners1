@@ -14,10 +14,12 @@ let config = {
  };
   let soundFX;
   let bg;
+  let rule;
   let startButton;
   let cloud1;
   let player;
   let platforms;
+  let tiles;
   let cursors;
   let score = 0;
   let scoreText;
