@@ -54,17 +54,25 @@ create () {
      platforms = this.physics.add.staticGroup();
      platforms.create(window.innerWidth/2, window.innerHeight, 'ground').setScale(4).refreshBody();
 
+     // platforms = this.physics.add.sprite(0,657, 1000, 30, 'ground').setScale(4);
+     // platforms.setCollideWorldBounds(true);
+
      ///=========================Tiles=======================///
+     tiles = this.physics.add.sprite(300, 450, 'tile1');
+     tiles.setBounce(0.2);
+     tiles.setCollideWorldBounds(true);
+     tiles.body.setGravityY(500);
+     tiles.setScale(0.4);
 
      // tiles = this.physics.add.staticGroup();
      // tiles.create(window.innerWidth/4, window.innerHeight, 'tile1').setScale(1).refreshBody();
 
      ///========================= Score =======================///
      // The style of the text
-     let style = { font: '20px Arial', fill: '#fff', backgroundColor: 'black'};
+     let style = { font: '30px Arial', fill: '#000'};
      // Display the score in the top left corner
      // Parameters: x position, y position, text, style
-     scoreText = this.add.text(20, 20, 'score: ' + score, style);
+     scoreText = this.add.text(1275, 20, 'score: ' + score, style);
 
      ///========================= Cursors =======================///
      cursors = this.input.keyboard.createCursorKeys();
@@ -76,13 +84,24 @@ create () {
      //        })
      //    }
      // });
+     //
    }
 
 update ( time, delta) {
-  bg.tilePositionX = (iter) * -400;
-  cloud1.tilePositionX = (iter) * -400;
+if(player.anims.play ===true){
+  this.score += 10;
+  this.scoreText = ('score: ' + this.score);
+}
+
+  this.physics.add.collider(player, platforms);
+  this.physics.add.collider(platforms, tiles);
+  this.physics.add.collider(player,tiles);
+
+  // platforms.tilePositionX = (iter) * -300;
+
+  bg.tilePositionX = (iter) * -200;
+  cloud1.tilePositionX = (iter) * -350;
   iter -=0.01;
-    this.physics.add.collider(player, platforms);
     if (cursors.right.isDown) {
         player.anims.play('right', true);
         player.x = player.x + 64 * (delta / 1500);
@@ -100,7 +119,7 @@ update ( time, delta) {
 
     }
     if ((cursors.up.isDown || cursors.space.isDown) && player.body.touching.down && timer < 330)
-       {  player.body.velocity.y = -330;    }
+       {  player.body.velocity.y = -400;    }
 
   };
 }

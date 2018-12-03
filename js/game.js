@@ -15,6 +15,7 @@ let config = {
   let soundFX;
   let bg;
   let rule;
+  let ruleDescription;
   let startButton;
   let cloud1;
   let player;

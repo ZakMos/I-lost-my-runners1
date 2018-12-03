@@ -37,7 +37,8 @@ class Start extends Phaser.Scene {
     };
 
     ///=========================Rules =======================///
-    rule = this.add.text(window.innerWidth/2*0.93, 440, 'Rule' ,  { font: '20px Arial', boundsAlignH: "center", fill: '#fff', backgroundColor: 'black'});
+    rule = this.add.text(window.innerWidth/2*0.79, 440, 'Rules of The Game' ,  { font: '35px Arial', boundsAlignH: "center", fill: '#000'});
+    ruleDescription = this.add.text(325, 500, 'Use the right arrow to begin running and the spacebar or up key to jump.' ,  { font: '25px Arial', boundsAlignH: "center", fill: '#000'});
 
 
     ///=========================Button=======================///
