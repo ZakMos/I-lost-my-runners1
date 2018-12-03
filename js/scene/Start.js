@@ -40,15 +40,18 @@ class Start extends Phaser.Scene {
     rule = this.add.text(window.innerWidth/2*0.93, 440, 'Rule' ,  { font: '20px Arial', boundsAlignH: "center", fill: '#fff', backgroundColor: 'black'});
 
 
+
+
     ///=========================Button=======================///
-    this.startButton = this.add.image(window.innerWidth/2,window.innerHeight/2,'start').setScale(1);
-    this.startButton.setInteractive();
+    startButton = this.add.image(window.innerWidth/2,window.innerHeight/2,'start').setScale(1);
+    startButton.setInteractive();
     this.input.on('gameobjectdown', this.onObjectClicked)
     }
+
     onObjectClicked(e){
     this.scene.scene.start('PlayGame');
-    if(soundFX.isPlaying) soundFX.pause();
-    else soundFX.resume();
+    // if(soundFX.isPlaying) soundFX.pause();
+    // else soundFX.resume();
     }
 
   update(){

@@ -10,20 +10,26 @@ let config = {
        }
      },
      parent: 'phaser-example',
-     scene: [ Start, PlayGame ]
+     scene: [ Start, PlayGame, GameOver ]
  };
   let soundFX;
   let bg;
   let rule;
   let startButton;
+  let playAgain;
   let cloud1;
+  let assassins = Phaser.Physics.Arcade.Group;
   let player;
   let platforms;
+  let stars;
+  let tile1;
   let tiles;
   let cursors;
   let score = 0;
   let scoreText;
   let timer = 0;
   let iter = 0;
+  let gameOver = false;
+  let gameOverText;
 
 let game = new Phaser.Game(config);
