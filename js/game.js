@@ -26,10 +26,13 @@ let config = {
   let tiles;
   let cursors;
   let score = 0;
+  let highScore = 0;
   let scoreText;
   let timer = 0;
   let iter = 0;
   let gameOver = false;
   let gameOverText;
+  let gameOverScoreText;
+  let highScoreText;
 
 let game = new Phaser.Game(config);

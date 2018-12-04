@@ -49,6 +49,7 @@ create () {
       player.body.setGravityY(500);
       player.setScale(1.5)
       // player.body.immovable = true;
+      console.log('hello')
       this.anims.create({
        key: 'right',
        frames: this.anims.generateFrameNumbers('dude', { start: 0, end: 3 }),
@@ -157,6 +158,7 @@ update ( time, delta) {
 collectStar (player, star) {
   star.disableBody(true, true);
   score += 10;
+  // this.labelScore.text = scoreText;
   scoreText.setText('Score: ' + score);
 
   if (stars.countActive(true) === 0) {
