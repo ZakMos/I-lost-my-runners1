@@ -22,34 +22,17 @@ class GameOver extends Phaser.Scene{
             fill: '#fff'
         });
 
-
-
-
-
-
-
-
     playAgain = this.add.image(window.innerWidth/2,window.innerHeight/2,'playAgain').setScale(1);
-    // playAgain.anchor.set(0.5);
-    // this.input.on('gameobjectdown', this.restartGame, this);
     playAgain.setInteractive();
     this.input.on('gameobjectdown', this.onObjectClicked)
     }
-    onObjectClicked(e){
-    // restartGame () {
-      this.onObjectClicked.tilesArray.length = 0;
-      this.selectedArray.length = 0;
-      this.state.start('PlayGame');
-      // this.scene.scene.restart('PlayGame');
-      // this.scene.scene.start('PlayGame');
 
+    onObjectClicked(e){
+      this.scene.scene.start('PlayGame');
+      gameOver = false;
     // if(soundFX.isPlaying) soundFX.pause();
     // else soundFX.resume();
-
   }
-
-
-
 
   update(){
     highScoreText.text = 'High Score: ' + localStorage.getItem("highScore");
