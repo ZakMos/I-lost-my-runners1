@@ -136,7 +136,7 @@ update ( time, delta) {
     this.scene.start('GameOver');
   }
 
-  //========================= Animated Background =======================///
+  //====================-===== Animated Background =======================///
   bg.tilePositionX += 1.5;
   cloud1.tilePositionX  += 1;
   p1.tilePositionX  += 1;
