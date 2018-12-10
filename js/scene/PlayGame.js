@@ -10,7 +10,11 @@ preload () {
     this.load.image('cloud1', 'assets/Export/cloud1.png');
     this.load.image('ground', 'assets/platform.png');
     this.load.image('star', 'assets/star.png');
-    this.load.image('tiles', 'assets/Export/tile_2.png');
+    this.load.image('platforms', 'assets/Export/tile_3.png');
+    this.load.image('p1', 'assets/Export/tile_3.png');
+    this.load.image('p2', 'assets/Export/tile.png');
+
+
     // this.load.image('test', 'assets/Export/cloud2.png');
     this.load.spritesheet('dude','assets/dude.png',
       { frameWidth: 32, frameHeight: 48 });
@@ -27,9 +31,33 @@ create () {
 
     cloud1 = this.add.tileSprite(600, 200, 2500, 2000, 'cloud1').setScale(1);
 
+
+
+    ///=========================Tiles=======================///
+//
+    p1 = this.add.tileSprite(100, 1100, 4000, 2000, 'p1').setScale(0.5);
+
+
+    platforms = this.physics.add.group({
+      key: 'platforms',
+      frameQuantity: 1,
+      repeat: true,
+      setXY: { x: 600, y: 500, stepX: 400},
+      velocityX: -100,
+      immovable: false
+    });
+    // platforms.getChildren()[0].setFrictionX(1.5);
+    // platforms.getChildren()[1].setFrictionX(1);
+    // platforms.getChildren()[2].setFrictionX(0.5);
+    // platforms.getChildren()[3].setFrictionX(0);
+
+
+
     ///=========================Ground=======================///
-    platforms = this.physics.add.staticGroup();
-    platforms.create(window.innerWidth/2, window.innerHeight, 'ground').setScale(4).refreshBody();
+    ground = this.physics.add.staticGroup();
+    ground.create(window.innerWidth/2, window.innerHeight, 'ground').setScale(4).refreshBody();
+
+
 
     ///=========================Player=======================///
       player = this.physics.add.sprite(100, 450, 'dude');
@@ -46,24 +74,23 @@ create () {
        repeat: -1
      });
      // added new in 23-11-2018,, (Left side)
-     this.anims.create({
+      this.anims.create({
       key: 'left',
       frames: this.anims.generateFrameNumbers('dude', { start: 5, end: 8 }),
       frameRate: 10,
       repeat: -1
     });
-    this.anims.create({
+      this.anims.create({
         key: 'turn',
         frames: [ { key: 'dude', frame: 4 } ],
         frameRate: 20
       });
 
 
-     ///=========================Tiles=======================///
      stars = this.physics.add.group({
        key: 'star',
        sprite: (200, 200),
-       repeat: 1,
+       repeat: 11,
        setXY: { x: 12, y: 0, stepX: 70}
      });
 
@@ -72,6 +99,8 @@ create () {
        child.setBounceX(Phaser.Math.FloatBetween(0.1, 0.4));
      });
 
+
+     // ========= code work (tile) from bomb example part (1-2)========
      tiles = this.physics.add.group();
 
      ///========================= Score =======================///
@@ -80,11 +109,26 @@ create () {
      ///========================= Cursors =======================///
      cursors = this.input.keyboard.createCursorKeys();
 
-     this.physics.add.collider(player, platforms);
-     this.physics.add.collider(stars, platforms);
-     this.physics.add.collider(tiles, platforms);
+     this.physics.add.collider(player, ground);
+
      this.physics.add.overlap(player, stars, this.collectStar, null, this);
-     this.physics.add.collider(player, tiles, this.hitTile, null, this);
+     this.physics.add.collider(player, platforms, this.hitTile, null, this);
+
+
+
+     // this.physics.add.collider(stars, platforms);
+     this.physics.add.collider(stars, ground);
+
+
+
+    this.physics.add.collider(platforms, ground);
+
+
+    this.physics.add.collider(p1, ground);
+    this.physics.add.collider(p1, platforms);
+    this.physics.add.collider(p1, player);
+    this.physics.add.collider(p1, stars);
+
 }
 
 update ( time, delta) {
@@ -92,25 +136,26 @@ update ( time, delta) {
     this.scene.start('GameOver');
   }
 
-  ///========================= Animated Background =======================///
-  bg.tilePositionX = (iter) * -400;
-  cloud1.tilePositionX = (iter) * -400;
-  iter -=0.01;
+  //========================= Animated Background =======================///
+  bg.tilePositionX += 1.5;
+  cloud1.tilePositionX  += 1;
+  p1.tilePositionX  += 1;
+  platforms.tilePositionX  += 1;
 
   ///========================= Collider =======================///
     if (cursors.right.isDown)  {
         player.anims.play('right', true);
-        player.x += 100 * (delta / 800);
+        player.x += 100 * (delta / 330);
     } else if(cursors.left.isDown) {
         player.anims.play('left', true);
-        player.x += -100 * (delta / 800);
+        player.x += -100 * (delta /330);
     } else {
         player.setVelocityX(0);
         player.anims.play('turn');
     }
 
     if ((cursors.up.isDown || cursors.space.isDown) && player.body.touching.down)
-       {  player.setVelocityY (-600);    }
+       {  player.setVelocityY (-1000);    }
 }
 
 collectStar (player, star) {
@@ -123,26 +168,22 @@ collectStar (player, star) {
     child.enableBody(true, child.x, 0, true, true);
   });
 
-    // let x = (player.x < 400) ? Phaser.Math.Between(400, 800) : Phaser.Math.Between(0, 400);
-    // tile1 = tiles.create(x, 16, "tiles");
+  ///=========================Tiles=======================///
+
+// ========= code work (tile) from bomb example part (2-2)========
+    let y = (player.y < -100) ? Phaser.Math.Between(100, 200) : Phaser.Math.Between(600, 600);
+    tile1 = tiles.create(y, 16, "p1");
     // tile1.setBounce(1);
     // tile1.setCollideWorldBounds(true);
-    // tile1.setVelocity(Phaser.Math.Between(-200, 200), 20);
-    // tile1.allowGravity = false;
-
-
-    let y = (player.y > 100) ? Phaser.Math.Between(100, 200) : Phaser.Math.Between(0, 100);
-    tile1 = tiles.create(y, 1, "tiles");
-    // tile1.setBounce(1);
-    // tile1.setCollideWorldBounds(true);
-    tile1.setVelocity(Phaser.Math.Between (50, -50), 5);
-    // tile1.allowGravity = false;
+    tile1.setVelocity(Phaser.Math.Between(-100, 0), -200);
+    tile1.allowGravity = false;
+    this.physics.add.collider(tile1, ground);
 
   }
 }
 
 
- hitTile (player, tile1) {
+ hitTile (player, platforms) {
   this.physics.pause();
   player.setTint(0xff0000);
   player.anims.play('right');

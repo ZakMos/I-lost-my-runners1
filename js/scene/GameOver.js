@@ -30,6 +30,7 @@ class GameOver extends Phaser.Scene{
     onObjectClicked(e){
       this.scene.scene.start('PlayGame');
       gameOver = false;
+      score = 0;
     // if(soundFX.isPlaying) soundFX.pause();
     // else soundFX.resume();
   }

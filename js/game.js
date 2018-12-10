@@ -15,12 +15,15 @@ let config = {
   let soundFX;
   let bg;
   let rule;
+  let ruleDescription;
   let startButton;
   let playAgain;
   let cloud1;
   let assassins = Phaser.Physics.Arcade.Group;
   let player;
   let platforms;
+  let p1;
+  let ground;
   let stars;
   let tile1;
   let tiles;
@@ -29,7 +32,6 @@ let config = {
   let highScore = 0;
   let scoreText;
   let timer = 0;
-  let iter = 0;
   let gameOver = false;
   let gameOverText;
   let gameOverScoreText;
