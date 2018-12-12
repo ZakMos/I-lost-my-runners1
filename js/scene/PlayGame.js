@@ -66,6 +66,14 @@ create () {
    }
 
 update ( time, delta) {
+
+  if (gameOver){
+
+    this.scene.start('GameOver');
+    return false;
+  }
+
+
   score = parseFloat((score + 0.04).toFixed(2));
   scoreText.setText( 'score: '+ Math.floor(score));
   if (score % 25 === 0){
@@ -73,7 +81,7 @@ update ( time, delta) {
   }
   this.physics.add.collider(player, platforms);
   this.physics.add.collider(platforms, obstacle);
-  this.physics.add.collider(player, obstacle, this.gameOver, null, this);
+  this.physics.add.collider(player, obstacle, this.hitTile, null, this);
 
   bg.tilePositionX += 2 * speedFactor;
   cloud1.tilePositionX += 1 * speedFactor;
@@ -107,12 +115,15 @@ update ( time, delta) {
     ]
 
     const chosen = obstacleArray[Phaser.Math.Between(0, obstacleArray.length -1)];
-  
+
     obstacle = this.physics.add.sprite(window.innerWidth, window.innerHeight - chosen.height, chosen.name );
   }
 
-  gameOver(){
-    this.scene.pause();
-    // this.scene.start('GameOver');
+
+
+  hitTile (player, makeObstacle, platforms) {
+    this.physics.pause();
+    player.setTint(0xff0000);
+    gameOver = true;
   }
 }

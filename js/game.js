@@ -10,7 +10,7 @@ let config = {
        }
      },
      parent: 'phaser-example',
-     scene: [ Start, PlayGame ]
+     scene: [ Start, PlayGame, GameOver ]
  };
   let soundFX;
   let bg;
@@ -28,6 +28,14 @@ let config = {
   let iter = 0;
   let arrowRight;
   let arrowLeft;
+  let speedFactor = 1;
+  let gameOverText;
+  let gameOverScoreText;
+  let highScoreText;
+  let playAgain;
+  let hitTile;
+  let gameOver;
+  let highScore;
   // let arrowUp;
 
 let game = new Phaser.Game(config);
