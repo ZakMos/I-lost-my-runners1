@@ -14,7 +14,7 @@
          "width":50,
          "x":0,
          "y":0
-        },
+        }, 
         {
          "compression":"zlib",
          "data":"eJztzsEJAAAIA7FO4\/4juoMi+Ej+V5oAAAAAAAAAAAD8U8ftdH\/zi1sNSEcAmQ==",
@@ -28,7 +28,7 @@
          "width":50,
          "x":0,
          "y":0
-        },
+        }, 
         {
          "compression":"zlib",
          "data":"eJztyjENAAAMw7ACGX+cAzFN6mG\/SQIAAAAAAAAAANBtjv3ro8sCAP8AcQ==",
@@ -42,7 +42,7 @@
          "width":50,
          "x":0,
          "y":0
-        },
+        }, 
         {
          "compression":"zlib",
          "data":"eJztzLEJAEAIA0Bxgd9\/WycQebDzrkmRkAgAAAAAAAAAAAAue01O\/e8ul\/66vgCjkAEv",
@@ -54,96 +54,6 @@
          "type":"tilelayer",
          "visible":true,
          "width":50,
-         "x":0,
-         "y":0
-        },
-        {
-         "id":7,
-         "layers":[
-                {
-                 "compression":"zlib",
-                 "data":"eJztyzEKADAIA0B\/0P\/\/1l2QOtihcLcESYwAAAAAAAAA+MsZZt3f7tf\/XQ8AwI4Eef4BDw==",
-                 "encoding":"base64",
-                 "height":50,
-                 "id":8,
-                 "name":"ground2",
-                 "opacity":1,
-                 "type":"tilelayer",
-                 "visible":true,
-                 "width":50,
-                 "x":0,
-                 "y":0
-                },
-                {
-                 "compression":"zlib",
-                 "data":"eJztzLEJAAAIA0EHcf85HUFBsJC77oskAgAAAAAAAJjKprd\/13sAAPikACobAHE=",
-                 "encoding":"base64",
-                 "height":50,
-                 "id":9,
-                 "name":"rock2",
-                 "opacity":1,
-                 "type":"tilelayer",
-                 "visible":true,
-                 "width":50,
-                 "x":0,
-                 "y":0
-                },
-                {
-                 "compression":"zlib",
-                 "data":"eJztyrEJAAAMw7DQ\/4\/uEYEORVrtBAAAAAAAAOCnKfv1DwBAZwF1MAAJ",
-                 "encoding":"base64",
-                 "height":50,
-                 "id":10,
-                 "name":"water2",
-                 "opacity":1,
-                 "type":"tilelayer",
-                 "visible":true,
-                 "width":50,
-                 "x":0,
-                 "y":0
-                },
-                {
-                 "compression":"zlib",
-                 "data":"eJztzgENAAAIA6CnsX9EW9zNQQISAAAAAAAA4Ku5DgAAQNECyR8AJw==",
-                 "encoding":"base64",
-                 "height":50,
-                 "id":11,
-                 "name":"mashrom2",
-                 "opacity":1,
-                 "type":"tilelayer",
-                 "visible":true,
-                 "width":50,
-                 "x":0,
-                 "y":0
-                },
-                {
-                 "compression":"zlib",
-                 "data":"eJztzDENAEAIBEHU4Ab\/dt7ANyRHN1NvtgoAAAAAAABI63C\/\/fE34X77AwDg1gMIggFa",
-                 "encoding":"base64",
-                 "height":50,
-                 "id":12,
-                 "name":"trap2",
-                 "opacity":1,
-                 "type":"tilelayer",
-                 "visible":true,
-                 "width":50,
-                 "x":0,
-                 "y":0
-                }],
-         "name":"level2",
-         "opacity":1,
-         "type":"group",
-         "visible":false,
-         "x":0,
-         "y":0
-        },
-        {
-         "id":5,
-         "layers":[],
-         "name":"level1",
-         "opacity":1,
-         "type":"group",
-         "visible":false,
          "x":0,
          "y":0
         }],
