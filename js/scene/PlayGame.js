@@ -9,21 +9,19 @@ preload () {
     this.load.image('background', 'assets/background.png');
     this.load.image('cloud1', 'assets/Export/cloud-crop.png');
     this.load.image('ground', 'assets/platform.png');
-    this.load.image('tiles', 'assets/Export/tile_2.png');
+    this.load.image('tiles', 'assets/Export/tile.png');
     this.load.spritesheet('dude','assets/dude.png',
       { frameWidth: 32, frameHeight: 48 });
   }
 
 create () {
-
-
   ///=========================AUDIO=======================///
   // soundFX = this.sound.add("gameAudio", { loop: "true"});
   // soundFX.play();
 
     ///=========================SKY=======================///
     bg = this.add.tileSprite(window.innerWidth/2, window.innerHeight/2, window.innerWidth/2, window.innerHeight/2, 'background').setScale(2.3);
-console.log(window.innerWidth)
+
     cloud1 = this.add.tileSprite(247/2 + 50, 100, window.innerWidth * 2, window.innerHeight / 2, 'cloud1').setScale(1);
 
 
@@ -49,20 +47,15 @@ console.log(window.innerWidth)
 
      ///=========================Tiles=======================///
 
-     tiles = this.physics.add.group({
-       gravityY: 400
-     });
-     tiles.clear();
+     tiles = this.physics.add.group();
+     this.makeTiles();
 
-     tile = this.physics.add.sprite(window.innerWidth, window.innerHeight-145 );
-     tiles.add(tile);
 
      ///========================= Score =======================///
-     // The style of the text
-     let style = { font: '30px Arial', fill: '#000'};
+
      // Display the score in the top left corner
      // Parameters: x position, y position, text, style
-     scoreText = this.add.text(1275, 20, 'score: ' + score, style);
+     scoreText = this.add.text(1275, 20, 'score: ' + score, { font: '30px Arial', fill: '#000'});
 
      ///========================= Cursors =======================///
      cursors = this.input.keyboard.createCursorKeys();
@@ -92,8 +85,11 @@ update ( time, delta) {
 
   };
 
-  makeTile(){
-
+  makeTiles(){
+    tiles.clear();
+    // const height= phMath.random()
+    tile = this.physics.add.sprite(window.innerWidth, window.innerHeight-145 );
+    tiles.add(tile);
   }
 
   gameOver(){
