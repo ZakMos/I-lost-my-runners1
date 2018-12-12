@@ -69,7 +69,7 @@ update ( time, delta) {
   score = parseFloat((score + 0.04).toFixed(2));
   scoreText.setText( 'score: '+ Math.floor(score));
   if (score % 25 === 0){
-    speedFactor += 0.5
+    speedFactor += 0.25
   }
   this.physics.add.collider(player, platforms);
   this.physics.add.collider(platforms, obstacle);
