@@ -75,8 +75,10 @@ update ( time, delta) {
   bg.tilePositionX += 2;
   cloud1.tilePositionX += 1;
   obstacle.x -= 4;
-
-
+  
+  if(obstacle.x < -50) {
+    this.makeObstacle()
+  }
 
   player.anims.play('right', true);
 
