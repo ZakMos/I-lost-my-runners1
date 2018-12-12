@@ -31,7 +31,7 @@ create () {
       player = this.physics.add.sprite(window.innerWidth/3, window.innerHeight-170, 'dude');
       player.setBounce(0.2);
       player.setCollideWorldBounds(true);
-      player.body.setGravityY(450);
+      player.body.setGravityY(300);
       player.setScale(1.5)
 
       this.anims.create({
@@ -45,7 +45,7 @@ create () {
      ///=========================Ground=======================///
      platforms = this.physics.add.staticGroup();
      platforms.create(window.innerWidth/2, window.innerHeight, 'ground').setScale(4).refreshBody();
-     console.log(platforms)
+
 
 
      ///=========================Obstacle=======================///
@@ -58,7 +58,7 @@ create () {
 
      // Display the score in the top left corner
      // Parameters: x position, y position, text, style
-     scoreText = this.add.text(100, 20, 'score: ' + score, { font: '30px Arial', fill: '#000'});
+     scoreText = this.add.text(50, 20, 'score: ' + score, { font: '30px Arial', fill: '#000'});
 
      ///========================= Cursors =======================///
      cursors = this.input.keyboard.createCursorKeys();
@@ -66,18 +66,18 @@ create () {
    }
 
 update ( time, delta) {
-
-  score += 0.04;
+  score = parseFloat((score + 0.04).toFixed(2));
   scoreText.setText( 'score: '+ Math.floor(score));
-
-
+  if (score % 25 === 0){
+    speedFactor += 0.5
+  }
   this.physics.add.collider(player, platforms);
   this.physics.add.collider(platforms, obstacle);
   this.physics.add.collider(player, obstacle, this.gameOver, null, this);
 
-  bg.tilePositionX += 2;
-  cloud1.tilePositionX += 1;
-  obstacle.x -= 4;
+  bg.tilePositionX += 2 * speedFactor;
+  cloud1.tilePositionX += 1 * speedFactor;
+  obstacle.x -= 4 * speedFactor;
 
   if(obstacle.x < -50) {
     this.makeObstacle()
@@ -107,11 +107,12 @@ update ( time, delta) {
     ]
 
     const chosen = obstacleArray[Phaser.Math.Between(0, obstacleArray.length -1)];
-    console.log(chosen)
+  
     obstacle = this.physics.add.sprite(window.innerWidth, window.innerHeight - chosen.height, chosen.name );
   }
 
   gameOver(){
     this.scene.pause();
+    // this.scene.start('GameOver');
   }
 }
