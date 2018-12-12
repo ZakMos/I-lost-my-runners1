@@ -140,6 +140,7 @@ update ( time, delta) {
   }
 
   gameOver(){
+    speedFactor = 1;
     this.scene.pause();
     // this.scene.start('GameOver');
   }
