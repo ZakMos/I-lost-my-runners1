@@ -9,7 +9,9 @@ preload () {
     this.load.image('background', 'assets/background.png');
     this.load.image('cloud1', 'assets/Export/cloud-crop.png');
     this.load.image('ground', 'assets/platform.png');
-    this.load.image('tiles', 'assets/Export/tile.png');
+    this.load.image('small', 'assets/small.png');
+    this.load.image('long', 'assets/long.png');
+    this.load.image('high', 'assets/high.png');
     this.load.spritesheet('dude','assets/dude.png',
       { frameWidth: 32, frameHeight: 48 });
   }
@@ -29,7 +31,7 @@ create () {
       player = this.physics.add.sprite(window.innerWidth/3, window.innerHeight-170, 'dude');
       player.setBounce(0.2);
       player.setCollideWorldBounds(true);
-      player.body.setGravityY(500);
+      player.body.setGravityY(450);
       player.setScale(1.5)
 
       this.anims.create({
@@ -43,6 +45,7 @@ create () {
      ///=========================Ground=======================///
      platforms = this.physics.add.staticGroup();
      platforms.create(window.innerWidth/2, window.innerHeight, 'ground').setScale(4).refreshBody();
+     console.log(platforms)
 
 
      ///=========================Obstacle=======================///
@@ -55,7 +58,7 @@ create () {
 
      // Display the score in the top left corner
      // Parameters: x position, y position, text, style
-     scoreText = this.add.text(1275, 20, 'score: ' + score, { font: '30px Arial', fill: '#000'});
+     scoreText = this.add.text(100, 20, 'score: ' + score, { font: '30px Arial', fill: '#000'});
 
      ///========================= Cursors =======================///
      cursors = this.input.keyboard.createCursorKeys();
@@ -75,7 +78,7 @@ update ( time, delta) {
   bg.tilePositionX += 2;
   cloud1.tilePositionX += 1;
   obstacle.x -= 4;
-  
+
   if(obstacle.x < -50) {
     this.makeObstacle()
   }
@@ -88,8 +91,24 @@ update ( time, delta) {
   };
 
   makeObstacle(){
-    // const height= phMath.random()
-    obstacle = this.physics.add.sprite(window.innerWidth, window.innerHeight-145 );
+    const obstacleArray = [
+      {
+        name: "small",
+        height: 155
+      },
+      {
+        name: "long",
+        height: 155
+      },
+      {
+        name: "high",
+        height: 175
+      }
+    ]
+
+    const chosen = obstacleArray[Phaser.Math.Between(0, obstacleArray.length -1)];
+    console.log(chosen)
+    obstacle = this.physics.add.sprite(window.innerWidth, window.innerHeight - chosen.height, chosen.name );
   }
 
   gameOver(){
