@@ -7,7 +7,7 @@
 preload () {
     this.load.audio('gameAudio', ['assets/audio/game.mp3']);
     this.load.image('background', 'assets/background.png');
-    this.load.image('cloud1', 'assets/Export/cloud1.png');
+    this.load.image('cloud1', 'assets/Export/cloud-crop.png');
     this.load.image('ground', 'assets/platform.png');
     this.load.image('tiles', 'assets/Export/tile_2.png');
     this.load.spritesheet('dude','assets/dude.png',
@@ -23,8 +23,8 @@ create () {
 
     ///=========================SKY=======================///
     bg = this.add.tileSprite(window.innerWidth/2, window.innerHeight/2, window.innerWidth/2, window.innerHeight/2, 'background').setScale(2.3);
-
-    cloud1 = this.add.tileSprite(600, 200, 2500, 2000, 'cloud1').setScale(1);
+console.log(window.innerWidth)
+    cloud1 = this.add.tileSprite(247/2 + 50, 100, window.innerWidth * 2, window.innerHeight / 2, 'cloud1').setScale(1);
 
 
     ///=========================Player=======================///
@@ -77,13 +77,13 @@ update ( time, delta) {
   // this.physics.add.collider(platforms, tiles);
   // this.physics.add.collider(player, tiles);
 
-  bg.tilePositionX = (iter) * -200;
-  cloud1.tilePositionX = (iter) * -350;
+  bg.tilePositionX += 2;
+  cloud1.tilePositionX += 1;
 
-  // tiles.tilePositionX =(iter) * -200;
+  // tiles.tilePositionX += 1;
 
 
-  iter -=0.01;
+
   player.anims.play('right', true);
 
     if ((cursors.up.isDown || cursors.space.isDown) && player.body.touching.down && timer < 330)
