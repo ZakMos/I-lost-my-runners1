@@ -28,26 +28,19 @@ create () {
 
 
     ///=========================Player=======================///
-      player = this.physics.add.sprite(window.innerWidth/3, 450, 'dude');
+      player = this.physics.add.sprite(window.innerWidth/3, window.innerHeight-170, 'dude');
       player.setBounce(0.2);
       player.setCollideWorldBounds(true);
-      player.flipX = true;
       player.body.setGravityY(500);
       player.setScale(1.5)
 
       this.anims.create({
        key: 'right',
-       frames: this.anims.generateFrameNumbers('dude', { start: 0, end: 3 }),
+       frames: this.anims.generateFrameNumbers('dude', { start: 5, end: 8 }),
        frameRate: 10,
        repeat: -1
      });
-     // added new in 23-11-2018,, (Left side)
-     this.anims.create({
-      key: 'left',
-      frames: this.anims.generateFrameNumbers('dude', { start: 5, end: 8 }),
-      frameRate: 10,
-      repeat: -1
-    });
+
 
      ///=========================Ground=======================///
      platforms = this.physics.add.staticGroup();
@@ -91,15 +84,8 @@ update ( time, delta) {
 
 
   iter -=0.01;
-    if (cursors.right.isDown) {
-        player.anims.play('right', true);
-        player.x = player.x + 64 * (delta / 1500);
+  player.anims.play('right', true);
 
-    } else if(cursors.left.isDown){
-        player.anims.play('left', true);
-        player.x = player.x + -64 * (delta / 1500);
-
-    }
     if ((cursors.up.isDown || cursors.space.isDown) && player.body.touching.down && timer < 330)
        {  player.body.velocity.y = -400;    }
 
