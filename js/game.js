@@ -6,7 +6,7 @@ let config = {
        default: 'arcade',
        arcade: {
          gravity: { y: 200 },
-         debug: false
+         debug: true
        }
      },
      parent: 'phaser-example',
@@ -20,6 +20,7 @@ let config = {
   let cloud1;
   let player;
   let platforms;
+  let obstacle;
   let citybackground;
   let tiles;
   let cursors;
@@ -35,6 +36,7 @@ let config = {
   let building4;
   let building5;
   let building16;
+  let speedFactor = 1;
 
   // let arrowUp;
 

@@ -35,17 +35,17 @@ preload () {
     this.load.image('tiles', 'assets/Export/tile_2.png');
     this.load.spritesheet('dude','assets/Running/runningsprite.png',
       { frameWidth: 627.5, frameHeight: 447 });
+    this.load.image('small', 'assets/small.png');
+    this.load.image('long', 'assets/long.png');
+    this.load.image('high', 'assets/high.png');
   }
 
 create () {
-
-
   ///=========================AUDIO=======================///
   // soundFX = this.sound.add("gameAudio", { loop: "true"});
   // soundFX.play();
 
     ///=========================SKY=======================///
-    // bg = this.add.tileSprite(0, 0,  'background').setScale(2);
     bg = this.add.tileSprite(window.innerWidth/2, window.innerHeight/2, window.innerWidth/2, window.innerHeight/2, 'background').setScale(2.3);
     citybackground = this.add.sprite(window.innerWidth/2,window.innerHeight/2 + 25 , 'citybackground').setScale(0.85);
     cloud1 = this.add.tileSprite(0,0, 'cloud1').setScale(0.25);
@@ -57,9 +57,9 @@ create () {
     building16 = this.add.sprite(window.innerWidth/2, window.innerHeight/2 + 175 ,'building16').setScale(0.5);
 
     ///=========================Player=======================///
-      player = this.physics.add.sprite(500, 450, 'dude');
+      player = this.physics.add.sprite(window.innerWidth / 3, window.innerHeight - 170, 'dude');
       player.setCollideWorldBounds(true);
-      player.body.setGravityY(500);
+      player.body.setGravityY(300);
       player.setScale(0.25)
 
       this.anims.create({
@@ -68,90 +68,79 @@ create () {
        frameRate: 9,
        repeat: -1
      });
-     // added new in 23-11-2018,, (Left side)
-     this.anims.create({
-      key: 'left',
-      frames: this.anims.generateFrameNumbers('dude', { start: 5, end: 8 }),
-      frameRate: 10,
-      repeat: -1
-    });
+
 
      ///=========================Ground=======================///
      platforms = this.physics.add.staticGroup();
      platforms.create(window.innerWidth/2, window.innerHeight -45 , 'ground').setScale(0.45).refreshBody();
 
-     // platforms = this.physics.add.sprite(0,657, 1000, 30, 'ground').setScale(4);
-     // platforms.setCollideWorldBounds(true);
-
-     ///=========================Tiles=======================///
-     tiles = this.physics.add.sprite(350, 460, 'tiles');
-     tiles.setBounce(0.2);
-     tiles.setCollideWorldBounds(true);
-     tiles.body.setGravityY(500);
-     tiles.setScale(0.4);
 
 
-     // tiles = this.physics.add.staticGroup();
-     // tiles.create(window.innerWidth/4, window.innerHeight, 'tile1').setScale(1).refreshBody();
+     ///=========================Obstacle=======================///
+
+
+     this.makeObstacle();
+
 
      ///========================= Score =======================///
-     // The style of the text
-     let style = { font: '30px Arial', fill: '#000'};
+
      // Display the score in the top left corner
      // Parameters: x position, y position, text, style
-     scoreText = this.add.text(1275, 20, 'score: ' + score, style);
+     scoreText = this.add.text(50, 20, 'score: ' + score, { font: '30px Arial', fill: '#000'});
 
      ///========================= Cursors =======================///
      cursors = this.input.keyboard.createCursorKeys();
-     // this.input.on("pointermove", (pointer = Phaser.Input.Pointer) => {
-     //    if(pointer.isDown){
-     //      let tiles = this.add.sprite(pointer.x, pointer.y, 'tile1').play("hello");
-     //        tiles.on("animationcomplete", ()=> {
-     //          tile.destroy()
-     //        })
-     //    }
-     // });
-     //
+
    }
 
 update ( time, delta) {
-
-  score += 0.04;
+  score = parseFloat((score + 0.04).toFixed(2));
   scoreText.setText( 'score: '+ Math.floor(score));
-
-
+  if (score % 25 === 0){
+    speedFactor += 0.25
+  }
   this.physics.add.collider(player, platforms);
-  this.physics.add.collider(platforms, tiles);
-  this.physics.add.collider(player, tiles);
+  this.physics.add.collider(platforms, obstacle);
+  this.physics.add.collider(player, obstacle, this.gameOver, null, this);
 
+  bg.tilePositionX += 2 * speedFactor;
+  cloud1.tilePositionX += 1 * speedFactor;
+  obstacle.x -= 4 * speedFactor;
 
-  // platforms.tilePositionX = (iter) * -300;
+  if(obstacle.x < -50) {
+    this.makeObstacle()
+  }
 
-  bg.tilePositionX = (iter) * -200;
-  cloud1.tilePositionX = (iter) * -350;
+  player.anims.play('right', true);
 
-  tiles.tilePositionX =(iter) * -200;
-
-
-  iter -=0.01;
-    if (cursors.right.isDown) {
-        player.anims.play('right', true);
-        player.x = player.x + 64 * (delta / 1500);
-
-    } else if(cursors.left.isDown){
-        player.anims.play('left', true);
-        player.x = player.x + -64 * (delta / 1500);
-        //====== old code before 23-11-2018 =====
-    // } else if (cursors.left.isDown) {
-    //     player.setVelocityX(160);
-    //     player.anims.play('left', true);
-    // } else {
-    //     player.setVelocityX(0);
-    //     player.anims.play('turn');
-
-    }
     if ((cursors.up.isDown || cursors.space.isDown) && player.body.touching.down && timer < 330)
        {  player.body.velocity.y = -450;    }
 
   };
+
+  makeObstacle(){
+    const obstacleArray = [
+      {
+        name: "small",
+        height: 115
+      },
+      {
+        name: "long",
+        height: 115
+      },
+      {
+        name: "high",
+        height: 140
+      }
+    ]
+
+    const chosen = obstacleArray[Phaser.Math.Between(0, obstacleArray.length -1)];
+
+    obstacle = this.physics.add.sprite(window.innerWidth, window.innerHeight - chosen.height, chosen.name );
+  }
+
+  gameOver(){
+    this.scene.pause();
+    // this.scene.start('GameOver');
+  }
 }
