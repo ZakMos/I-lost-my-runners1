@@ -21,6 +21,8 @@ let config = {
   let player;
   let platforms;
   let obstacle;
+  let citybackground;
+  let tiles;
   let cursors;
   let score = 0;
   let scoreText;
@@ -28,6 +30,14 @@ let config = {
   let iter = 0;
   let arrowRight;
   let arrowLeft;
+  let building1;
+  let building2;
+  let building3;
+  let building4;
+  let building5;
+  let building16;
+  let speedFactor = 1;
+
   // let arrowUp;
 
 let game = new Phaser.Game(config);
