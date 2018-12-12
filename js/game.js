@@ -20,8 +20,7 @@ let config = {
   let cloud1;
   let player;
   let platforms;
-  let tiles;
-  let tile;
+  let obstacle;
   let cursors;
   let score = 0;
   let scoreText;

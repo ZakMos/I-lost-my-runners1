@@ -45,10 +45,10 @@ create () {
      platforms.create(window.innerWidth/2, window.innerHeight, 'ground').setScale(4).refreshBody();
 
 
-     ///=========================Tiles=======================///
+     ///=========================Obstacle=======================///
 
-     tiles = this.physics.add.group();
-     this.makeTiles();
+
+     this.makeObstacle();
 
 
      ///========================= Score =======================///
@@ -69,12 +69,12 @@ update ( time, delta) {
 
 
   this.physics.add.collider(player, platforms);
-  this.physics.add.collider(platforms, tiles);
-  this.physics.add.collider(player, tiles, this.gameOver, null, this);
+  this.physics.add.collider(platforms, obstacle);
+  this.physics.add.collider(player, obstacle, this.gameOver, null, this);
 
   bg.tilePositionX += 2;
   cloud1.tilePositionX += 1;
-  tile.x -= 4;
+  obstacle.x -= 4;
 
 
 
@@ -85,11 +85,9 @@ update ( time, delta) {
 
   };
 
-  makeTiles(){
-    tiles.clear();
+  makeObstacle(){
     // const height= phMath.random()
-    tile = this.physics.add.sprite(window.innerWidth, window.innerHeight-145 );
-    tiles.add(tile);
+    obstacle = this.physics.add.sprite(window.innerWidth, window.innerHeight-145 );
   }
 
   gameOver(){
