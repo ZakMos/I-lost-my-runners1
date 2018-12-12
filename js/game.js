@@ -21,6 +21,7 @@ let config = {
   let player;
   let platforms;
   let tiles;
+  let tile;
   let cursors;
   let score = 0;
   let scoreText;

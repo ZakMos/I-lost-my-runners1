@@ -48,12 +48,14 @@ console.log(window.innerWidth)
 
 
      ///=========================Tiles=======================///
-     // tiles = this.physics.add.sprite(350, 460, 'tiles');
-     // tiles.setBounce(0.2);
-     // tiles.setCollideWorldBounds(true);
-     // tiles.body.setGravityY(500);
-     // tiles.setScale(0.4);
-     // console.log(tiles);
+
+     tiles = this.physics.add.group({
+       gravityY: 400
+     });
+     tiles.clear();
+
+     tile = this.physics.add.sprite(window.innerWidth, window.innerHeight-145 );
+     tiles.add(tile);
 
      ///========================= Score =======================///
      // The style of the text
@@ -74,13 +76,12 @@ update ( time, delta) {
 
 
   this.physics.add.collider(player, platforms);
-  // this.physics.add.collider(platforms, tiles);
-  // this.physics.add.collider(player, tiles);
+  this.physics.add.collider(platforms, tiles);
+  this.physics.add.collider(player, tiles, this.gameOver, null, this);
 
   bg.tilePositionX += 2;
   cloud1.tilePositionX += 1;
-
-  // tiles.tilePositionX += 1;
+  tile.x -= 4;
 
 
 
@@ -90,4 +91,12 @@ update ( time, delta) {
        {  player.body.velocity.y = -400;    }
 
   };
+
+  makeTile(){
+
+  }
+
+  gameOver(){
+    this.scene.pause();
+  }
 }
