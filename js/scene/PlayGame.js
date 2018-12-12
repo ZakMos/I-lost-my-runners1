@@ -28,7 +28,7 @@ create () {
 
 
     ///=========================Player=======================///
-      player = this.physics.add.sprite(180, 450, 'dude');
+      player = this.physics.add.sprite(window.innerWidth/3, 450, 'dude');
       player.setBounce(0.2);
       player.setCollideWorldBounds(true);
       player.flipX = true;
