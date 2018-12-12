@@ -22,7 +22,6 @@ create () {
   // soundFX.play();
 
     ///=========================SKY=======================///
-    // bg = this.add.tileSprite(0, 0,  'background').setScale(2);
     bg = this.add.tileSprite(window.innerWidth/2, window.innerHeight/2, window.innerWidth/2, window.innerHeight/2, 'background').setScale(2.3);
 
     cloud1 = this.add.tileSprite(600, 200, 2500, 2000, 'cloud1').setScale(1);
@@ -54,19 +53,14 @@ create () {
      platforms = this.physics.add.staticGroup();
      platforms.create(window.innerWidth/2, window.innerHeight, 'ground').setScale(4).refreshBody();
 
-     // platforms = this.physics.add.sprite(0,657, 1000, 30, 'ground').setScale(4);
-     // platforms.setCollideWorldBounds(true);
 
      ///=========================Tiles=======================///
-     tiles = this.physics.add.sprite(350, 460, 'tiles');
-     tiles.setBounce(0.2);
-     tiles.setCollideWorldBounds(true);
-     tiles.body.setGravityY(500);
-     tiles.setScale(0.4);
-     console.log(tiles);
-
-     // tiles = this.physics.add.staticGroup();
-     // tiles.create(window.innerWidth/4, window.innerHeight, 'tile1').setScale(1).refreshBody();
+     // tiles = this.physics.add.sprite(350, 460, 'tiles');
+     // tiles.setBounce(0.2);
+     // tiles.setCollideWorldBounds(true);
+     // tiles.body.setGravityY(500);
+     // tiles.setScale(0.4);
+     // console.log(tiles);
 
      ///========================= Score =======================///
      // The style of the text
@@ -77,44 +71,23 @@ create () {
 
      ///========================= Cursors =======================///
      cursors = this.input.keyboard.createCursorKeys();
-     // this.input.on("pointermove", (pointer = Phaser.Input.Pointer) => {
-     //    if(pointer.isDown){
-     //      let tiles = this.add.sprite(pointer.x, pointer.y, 'tile1').play("hello");
-     //        tiles.on("animationcomplete", ()=> {
-     //          tile.destroy()
-     //        })
-     //    }
-     // });
-     //
+
    }
 
 update ( time, delta) {
 
-  function UpdateCollisions() {
-
-      SolveAABBOverlap();
-      SolvePolygonOverlap();
-      SolveStaticAABBCollision();
-      SolveStaticPolygonCollision();
-      SolveDynamicAABBCollision();
-      SolveDynamicPolygonCollision();
-
-  }
   score += 0.04;
   scoreText.setText( 'score: '+ Math.floor(score));
 
 
   this.physics.add.collider(player, platforms);
-  this.physics.add.collider(platforms, tiles);
-  this.physics.add.collider(player, tiles);
-
-
-  // platforms.tilePositionX = (iter) * -300;
+  // this.physics.add.collider(platforms, tiles);
+  // this.physics.add.collider(player, tiles);
 
   bg.tilePositionX = (iter) * -200;
   cloud1.tilePositionX = (iter) * -350;
 
-  tiles.tilePositionX =(iter) * -200;
+  // tiles.tilePositionX =(iter) * -200;
 
 
   iter -=0.01;
@@ -125,13 +98,6 @@ update ( time, delta) {
     } else if(cursors.left.isDown){
         player.anims.play('left', true);
         player.x = player.x + -64 * (delta / 1500);
-        //====== old code before 23-11-2018 =====
-    // } else if (cursors.left.isDown) {
-    //     player.setVelocityX(160);
-    //     player.anims.play('left', true);
-    // } else {
-    //     player.setVelocityX(0);
-    //     player.anims.play('turn');
 
     }
     if ((cursors.up.isDown || cursors.space.isDown) && player.body.touching.down && timer < 330)

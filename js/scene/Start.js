@@ -60,8 +60,9 @@ class Start extends Phaser.Scene {
     }
     onObjectClicked(e){
     this.scene.scene.start('PlayGame');
-    if(soundFX.isPlaying) soundFX.pause();
-    else soundFX.resume();
+    //for sound
+    // if(soundFX.isPlaying) soundFX.pause();
+    // else soundFX.resume();
     }
   update(){
 
