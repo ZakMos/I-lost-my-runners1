@@ -9,13 +9,13 @@ preload () {
     this.load.image('background', 'assets/background.png');
     this.load.image('cloud1', 'assets/Export/cloud1.png');
     this.load.image('ground', 'assets/platform.png');
-    this.load.image('tile1', 'assets/Export/tile_2.png');
-    // this.load.image('test', 'assets/Export/cloud2.png');
+    this.load.image('tiles', 'assets/Export/tile_2.png');
     this.load.spritesheet('dude','assets/dude.png',
       { frameWidth: 32, frameHeight: 48 });
   }
 
 create () {
+
 
   ///=========================AUDIO=======================///
   // soundFX = this.sound.add("gameAudio", { loop: "true"});
@@ -29,7 +29,7 @@ create () {
 
 
     ///=========================Player=======================///
-      player = this.physics.add.sprite(100, 450, 'dude');
+      player = this.physics.add.sprite(180, 450, 'dude');
       player.setBounce(0.2);
       player.setCollideWorldBounds(true);
       player.flipX = true;
@@ -58,11 +58,12 @@ create () {
      // platforms.setCollideWorldBounds(true);
 
      ///=========================Tiles=======================///
-     tiles = this.physics.add.sprite(300, 450, 'tile1');
+     tiles = this.physics.add.sprite(350, 460, 'tiles');
      tiles.setBounce(0.2);
      tiles.setCollideWorldBounds(true);
      tiles.body.setGravityY(500);
      tiles.setScale(0.4);
+     console.log(tiles);
 
      // tiles = this.physics.add.staticGroup();
      // tiles.create(window.innerWidth/4, window.innerHeight, 'tile1').setScale(1).refreshBody();
@@ -88,19 +89,34 @@ create () {
    }
 
 update ( time, delta) {
-if(player.anims.play ===true){
-  this.score += 10;
-  this.scoreText = ('score: ' + this.score);
-}
+
+  function UpdateCollisions() {
+
+      SolveAABBOverlap();
+      SolvePolygonOverlap();
+      SolveStaticAABBCollision();
+      SolveStaticPolygonCollision();
+      SolveDynamicAABBCollision();
+      SolveDynamicPolygonCollision();
+
+  }
+  score += 0.04;
+  scoreText.setText( 'score: '+ Math.floor(score));
+
 
   this.physics.add.collider(player, platforms);
   this.physics.add.collider(platforms, tiles);
-  this.physics.add.collider(player,tiles);
+  this.physics.add.collider(player, tiles);
+
 
   // platforms.tilePositionX = (iter) * -300;
 
   bg.tilePositionX = (iter) * -200;
   cloud1.tilePositionX = (iter) * -350;
+
+  tiles.tilePositionX =(iter) * -200;
+
+
   iter -=0.01;
     if (cursors.right.isDown) {
         player.anims.play('right', true);

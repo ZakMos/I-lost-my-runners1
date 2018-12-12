@@ -26,5 +26,8 @@ let config = {
   let scoreText;
   let timer = 0;
   let iter = 0;
+  let arrowRight;
+  let arrowLeft;
+  // let arrowUp;
 
 let game = new Phaser.Game(config);

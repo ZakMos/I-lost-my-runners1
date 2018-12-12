@@ -6,8 +6,14 @@ class Start extends Phaser.Scene {
 
   preload(){
     this.load.audio('startAudio', ['assets/audio/startAudio.mp3']);
-    this.load.image('bg', 'assets/back01.jpeg');
-    this.load.image('start', 'assets/startGame.gif');
+    this.load.image('bg', 'assets/background2.png');
+    this.load.image('start', 'assets/start-start.png');
+    this.load.image('cloud1', 'assets/Export/cloud1.png');
+    this.load.image('cloud2', 'assets/Export/cloud2.png');
+    this.load.image('cloud3', 'assets/Export/cloud3.png');
+    this.load.image('arrow', 'assets/arrow-right.png');
+    this.load.image('leftarrow', 'assets/left-arrow.png');
+    // this.load.image('arrowup', 'assets/arrow-up.png');
   }
 
   create(){
@@ -18,6 +24,9 @@ class Start extends Phaser.Scene {
 
     ///=========================Background=======================///
     bg = this.add.tileSprite(window.innerWidth/2,window.innerHeight/2, window.innerWidth/2,window.innerHeight/2, 'bg').setScale(2);
+    cloud1= this.add.sprite(75,80, 'cloud1');
+    cloud1= this.add.sprite(1400,100, 'cloud3');
+
 
     ///=========================Auto resize=======================///
 
@@ -37,12 +46,15 @@ class Start extends Phaser.Scene {
     };
 
     ///=========================Rules =======================///
-    rule = this.add.text(window.innerWidth/2*0.79, 440, 'Rules of The Game' ,  { font: '35px Arial', boundsAlignH: "center", fill: '#000'});
-    ruleDescription = this.add.text(325, 500, 'Use the right arrow to begin running and the spacebar or up key to jump.' ,  { font: '25px Arial', boundsAlignH: "center", fill: '#000'});
+    ruleDescription = this.add.text(window.innerWidth/2 - 380, 440, 'Use the right arrow to begin running and the spacebar or up key to jump.' ,  { font: '25px Arial', boundsAlignH: "center", fill: '#000'});
+
+    arrowRight= this.add.sprite(window.innerWidth/2+ 330,window.innerHeight/2,  'arrow').setScale(0.26);
+    arrowLeft= this.add.sprite(window.innerWidth/2-330,window.innerHeight/2,  'leftarrow').setScale(0.25);
+
 
 
     ///=========================Button=======================///
-    this.startButton = this.add.image(window.innerWidth/2,window.innerHeight/2,'start').setScale(1);
+    this.startButton = this.add.image(window.innerWidth/2,window.innerHeight/2,'start').setScale(1.25);
     this.startButton.setInteractive();
     this.input.on('gameobjectdown', this.onObjectClicked)
     }
@@ -51,7 +63,6 @@ class Start extends Phaser.Scene {
     if(soundFX.isPlaying) soundFX.pause();
     else soundFX.resume();
     }
-
   update(){
 
   }
