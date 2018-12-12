@@ -100,24 +100,27 @@ update ( time, delta) {
       SolveDynamicPolygonCollision();
 
   }
+
+  // Iterate score
   score += 0.04;
   scoreText.setText( 'score: '+ Math.floor(score));
 
-
+  // Poll collisions
   this.physics.add.collider(player, platforms);
   this.physics.add.collider(platforms, tiles);
   this.physics.add.collider(player, tiles);
 
 
   // platforms.tilePositionX = (iter) * -300;
-
+  // Animate bg
   bg.tilePositionX = (iter) * -200;
   cloud1.tilePositionX = (iter) * -350;
 
   tiles.tilePositionX =(iter) * -200;
 
-
+  // Defined in game.js
   iter -=0.01;
+  // might be redundant we just need to play the anim
     if (cursors.right.isDown) {
         player.anims.play('right', true);
         player.x = player.x + 64 * (delta / 1500);
@@ -134,6 +137,7 @@ update ( time, delta) {
     //     player.anims.play('turn');
 
     }
+    // JUMP!
     if ((cursors.up.isDown || cursors.space.isDown) && player.body.touching.down && timer < 330)
        {  player.body.velocity.y = -400;    }
 
