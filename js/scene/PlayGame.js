@@ -32,9 +32,8 @@ preload () {
     this.load.image('building15', 'assets/Background/building15.png');
     this.load.image('building16', 'assets/Background/building16.png');
     this.load.image('ground', 'assets/Background/floorcopy.png');
-    this.load.image('tiles', 'assets/Export/tile_2.png');
-    this.load.spritesheet('dude','assets/Running/runningsprite.png',
-      { frameWidth: 627.5, frameHeight: 447 });
+    this.load.spritesheet('player','assets/Running/runningsprite1.png',
+      { frameWidth: 336, frameHeight: 447 });
     this.load.image('small', 'assets/small.png');
     this.load.image('long', 'assets/long.png');
     this.load.image('high', 'assets/high.png');
@@ -47,25 +46,26 @@ create () {
 
     ///=========================SKY=======================///
     bg = this.add.tileSprite(window.innerWidth/2, window.innerHeight/2, window.innerWidth/2, window.innerHeight/2, 'background').setScale(2.3);
-    citybackground = this.add.sprite(window.innerWidth/2,window.innerHeight/2 + 25 , 'citybackground').setScale(0.85);
-    cloud1 = this.add.tileSprite(0,0, 'cloud1').setScale(0.25);
-    building1 = this.add.sprite(90, window.innerHeight/2 + 90 ,'building1').setScale(0.40);
-    building2 = this.add.sprite(window.innerWidth/2 + 200, window.innerHeight/2 - 20 ,'building2').setScale(0.40);
-    building3 = this.add.sprite(window.innerWidth/2 + 350, window.innerHeight/2 + 90 ,'building3').setScale(0.40);
-    building4 = this.add.sprite(window.innerWidth/2 + 500, window.innerHeight/2 + 100 ,'building4').setScale(0.40);
-    building5 = this.add.sprite(window.innerWidth/2 + 190, window.innerHeight/2 +150 ,'building5').setScale(0.5);
-    building16 = this.add.sprite(window.innerWidth/2, window.innerHeight/2 + 175 ,'building16').setScale(0.5);
+
+    citybackground = this.add.tileSprite(window.innerWidth/2,window.innerHeight/2 , window.innerWidth * 1.20, window.innerHeight, 'citybackground').setScale(0.85);
+
+    building1 = this.add.tileSprite(90, window.innerHeight/2 +90, window.innerWidth * 2, window.innerHeight /2 ,'building1').setScale(1);
+    // building2 = this.add.sprite(window.innerWidth/2 + 200, window.innerHeight/2 - 20 ,'building2').setScale(0.40);
+    // building3 = this.add.sprite(window.innerWidth/2 + 350, window.innerHeight/2 + 90 ,'building3').setScale(0.40);
+    // building4 = this.add.sprite(window.innerWidth/2 + 500, window.innerHeight/2 + 100 ,'building4').setScale(0.40);
+    // building5 = this.add.sprite(window.innerWidth/2 + 190, window.innerHeight/2 +150 ,'building5').setScale(0.5);
+    // building16 = this.add.sprite(window.innerWidth/2, window.innerHeight/2 + 175 ,'building16').setScale(0.5);
 
     ///=========================Player=======================///
-      player = this.physics.add.sprite(window.innerWidth / 3, window.innerHeight - 170, 'dude');
+      player = this.physics.add.sprite(window.innerWidth / 10, window.innerHeight - 170, 'player');
       player.setCollideWorldBounds(true);
       player.body.setGravityY(300);
       player.setScale(0.25)
 
       this.anims.create({
        key: 'right',
-       frames: this.anims.generateFrameNumbers('dude', { start: 8, end: 17 }),
-       frameRate: 9,
+       frames: this.anims.generateFrameNumbers('player', { start: 0, end: 9 }),
+       frameRate: 15,
        repeat: -1
      });
 
@@ -103,9 +103,11 @@ update ( time, delta) {
   this.physics.add.collider(platforms, obstacle);
   this.physics.add.collider(player, obstacle, this.gameOver, null, this);
 
-  bg.tilePositionX += 2 * speedFactor;
-  cloud1.tilePositionX += 1 * speedFactor;
+  // animation
+  citybackground.tilePositionX += 2 * speedFactor;
+  building1.tilePositionX += 1 * speedFactor;
   obstacle.x -= 4 * speedFactor;
+
 
   if(obstacle.x < -50) {
     this.makeObstacle()
