@@ -49,7 +49,7 @@ create () {
 
     citybackground = this.add.tileSprite(window.innerWidth/2,window.innerHeight/2 , window.innerWidth * 1.20, window.innerHeight, 'citybackground').setScale(0.85);
 
-    building1 = this.add.tileSprite(90, window.innerHeight/2 +90, window.innerWidth * 2, window.innerHeight /2 ,'building1').setScale(1);
+    // building1 = this.add.tileSprite(90, window.innerHeight/2 +90, window.innerWidth * 2, window.innerHeight /2 ,'building1').setScale(1);
     // building2 = this.add.sprite(window.innerWidth/2 + 200, window.innerHeight/2 - 20 ,'building2').setScale(0.40);
     // building3 = this.add.sprite(window.innerWidth/2 + 350, window.innerHeight/2 + 90 ,'building3').setScale(0.40);
     // building4 = this.add.sprite(window.innerWidth/2 + 500, window.innerHeight/2 + 100 ,'building4').setScale(0.40);
@@ -68,7 +68,12 @@ create () {
        frameRate: 15,
        repeat: -1
      });
-
+     this.anims.create({
+      key: 'jump',
+      frames: this.anims.generateFrameNumbers('player', { start: 14, end: 14 }),
+      // frameRate: 15,
+      // repeat: -1
+     });
 
      ///=========================Ground=======================///
      platforms = this.physics.add.staticGroup();
@@ -94,6 +99,11 @@ create () {
    }
 
 update ( time, delta) {
+  if(gameOver) {
+     this.scene.start('GameOver');
+   }
+
+
   score = parseFloat((score + 0.04).toFixed(2));
   scoreText.setText( 'score: '+ Math.floor(score));
   if (score % 25 === 0){
@@ -105,7 +115,7 @@ update ( time, delta) {
 
   // animation
   citybackground.tilePositionX += 2 * speedFactor;
-  building1.tilePositionX += 1 * speedFactor;
+  // building1.tilePositionX += 1 * speedFactor;
   obstacle.x -= 4 * speedFactor;
 
 
@@ -113,10 +123,19 @@ update ( time, delta) {
     this.makeObstacle()
   }
 
-  player.anims.play('right', true);
+  if(player.anims.play('right', true)){
+        player.anims.play('right', true);
+
+          }
+  else if(cursors.up.isDown && player.anims.play('right', true)){
+    player.anims.play('jump', true);
+
+      player.anims.play('right', false)
+       }
 
     if ((cursors.up.isDown || cursors.space.isDown) && player.body.touching.down && timer < 330)
-       {  player.body.velocity.y = -450;    }
+       {  player.body.velocity.y = -450    }
+
 
   };
 
@@ -142,8 +161,13 @@ update ( time, delta) {
   }
 
   gameOver(){
+    this.physics.pause();
+      player.setTint(0xff0000);
+      player.anims.play('right');
+      gameOver = true;
+
     speedFactor = 1;
-    this.scene.pause();
+    // this.scene.pause();
     // this.scene.start('GameOver');
   }
 }
