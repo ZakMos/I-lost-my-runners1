@@ -16,7 +16,6 @@ class GameOver extends Phaser.Scene{
       font: '25px Arial',
        fill: '#fff'
      });
-     // highScore = parseFloat((score + 0.04).toFixed(2))
 
     highScoreText = this.add.text(600, 40, 'HS: ' + Math.floor(highScore), {
             font: '25px Arial',
