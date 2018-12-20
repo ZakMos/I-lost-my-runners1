@@ -10,19 +10,19 @@ class GameOver extends Phaser.Scene{
 
   create(){
     this.soundFX = this.sound.add('GameOverAudio', { loop: 'true'});
-    gameOverText = this.add.text(window.innerWidth/2*0.45, 470, 'Game Over' ,  { font: '150px Arial', boundsAlignH: "center", fill: '#f00'});
+    gameOverText = this.add.text(width/2 -350, height/2 + 100, 'Game Over' ,  { font: '150px Arial', boundsAlignH: "center", fill: '#f00'});
 
     gameOverScoreText = this.add.text(20, 40, 'Your Score: ' + Math.floor(score), {
       font: '25px Arial',
        fill: '#fff'
      });
 
-    highScoreText = this.add.text(window.innerWidth/1.3, 40, 'HS: ' + Math.floor(highScore), {
+    highScoreText = this.add.text(width/1.3, 40, 'HS: ' + Math.floor(highScore), {
             font: '25px Arial',
             fill: '#fff'
         });
 
-    playAgain = this.add.image(window.innerWidth/2,window.innerHeight/2,'playAgain').setScale(1);
+    playAgain = this.add.image(width/2,height/2,'playAgain').setScale(1);
     playAgain.setInteractive();
     this.input.on('gameobjectdown', this.onObjectClicked)
     }
