@@ -5,12 +5,12 @@ class GameOver extends Phaser.Scene{
   preload(){
 
     this.load.audio('GameOverAudio', ['assets/audio/gameOver.mp3']);
-    this.load.image('playAgain', 'assets/arrow-up.png');
+    this.load.image('playAgain', 'assets/play-again.png');
   }
 
   create(){
     this.soundFX = this.sound.add('GameOverAudio', { loop: 'true'});
-    gameOverText = this.add.text(window.innerWidth/2*0.93, 440, 'Game Over' ,  { font: '20px Arial', boundsAlignH: "center", fill: '#fff'});
+    gameOverText = this.add.text(window.innerWidth/2*0.45, 470, 'Game Over' ,  { font: '150px Arial', boundsAlignH: "center", fill: '#f00'});
 
     gameOverScoreText = this.add.text(20, 40, 'Your Score: ' + Math.floor(score), {
       font: '25px Arial',

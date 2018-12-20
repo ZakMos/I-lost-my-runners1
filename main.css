@@ -3,6 +3,9 @@ html {
   min-height: 97%;
 }
 
+body {
+  width: 100%;
+}
 
 .footer {
     position: absolute;

@@ -1,0 +1,29 @@
+{ "height":70,
+ "infinite":false,
+ "layers":[
+        {
+         "compression":"zlib",
+         "data":"eJztwQENAAAAwqD3T20ON6AAAAAAAAAAAODXACMAAAE=",
+         "encoding":"base64",
+         "height":70,
+         "id":1,
+         "name":"Tile Layer 1",
+         "opacity":1,
+         "type":"tilelayer",
+         "visible":true,
+         "width":32,
+         "x":0,
+         "y":0
+        }],
+ "nextlayerid":2,
+ "nextobjectid":1,
+ "orientation":"orthogonal",
+ "renderorder":"right-down",
+ "tiledversion":"1.2.1",
+ "tileheight":70,
+ "tilesets":[],
+ "tilewidth":32,
+ "type":"map",
+ "version":1.2,
+ "width":32
+}

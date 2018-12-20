@@ -6,13 +6,14 @@ let config = {
        default: 'arcade',
        arcade: {
          gravity: { y: 200 },
-         debug: true
+         debug: false
        }
      },
      parent: 'phaser-example',
      scene: [ Start, PlayGame, GameOver ]
  };
   let soundFX;
+  let sky;
   let bg;
   let rule;
   let ruleDescription;

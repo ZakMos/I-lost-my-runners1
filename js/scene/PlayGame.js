@@ -6,37 +6,18 @@
 
 preload () {
     this.load.audio('gameAudio', ['assets/audio/game.mp3']);
-    this.load.image('background', 'assets/Background/Sky.png');
+    this.load.image('sky', 'assets/Background/Sky.png');
+
+    this.load.image('background', 'assets/Background/citybackground5.png');
+
     this.load.image('citybackground', 'assets/Background/citybackground2.png');
-    // this.load.image('cloud1', 'assets/Export/cloud1.png');
-    this.load.image('cloud1', 'assets/Background/cloud1.png');
-    this.load.image('cloud2', 'assets/Background/cloud2.png');
-    this.load.image('cloud3', 'assets/Background/cloud3.png');
-    this.load.image('cloud4', 'assets/Background/cloud4.png');
-    this.load.image('cloud5', 'assets/Background/cloud5.png');
-    this.load.image('cloud6', 'assets/Background/cloud6.png');
-    this.load.image('building1', 'assets/Background/building1.png');
-    this.load.image('building2', 'assets/Background/building2.png');
-    this.load.image('building3', 'assets/Background/building3.png');
-    this.load.image('building4', 'assets/Background/building4.png');
-    this.load.image('building5', 'assets/Background/building5.png');
-    this.load.image('building6', 'assets/Background/building6.png');
-    this.load.image('building7', 'assets/Background/building7.png');
-    this.load.image('building8', 'assets/Background/building8.png');
-    this.load.image('building9', 'assets/Background/building9.png');
-    this.load.image('building10', 'assets/Background/building10.png');
-    this.load.image('building11', 'assets/Background/building11.png');
-    this.load.image('building12', 'assets/Background/building12.png');
-    this.load.image('building13', 'assets/Background/building13.png');
-    this.load.image('building14', 'assets/Background/building14.png');
-    this.load.image('building15', 'assets/Background/building15.png');
-    this.load.image('building16', 'assets/Background/building16.png');
-    this.load.image('ground', 'assets/Background/floorcopy.png');
+
+    this.load.image('ground', 'assets/Background/floorcopy1.png');
     this.load.spritesheet('player','assets/Running/runningsprite1.png',
       { frameWidth: 336, frameHeight: 447 });
     this.load.image('small', 'assets/small.png');
-    this.load.image('long', 'assets/long.png');
-    this.load.image('high', 'assets/high.png');
+    this.load.image('long', 'assets/long2.png');
+    this.load.image('high', 'assets/high1.png');
   }
 
 create () {
@@ -45,9 +26,12 @@ create () {
   // soundFX.play();
 
     ///=========================SKY=======================///
-    bg = this.add.tileSprite(window.innerWidth/2, window.innerHeight/2, window.innerWidth/2, window.innerHeight/2, 'background').setScale(2.3);
+    sky = this.add.tileSprite(window.innerWidth/2, window.innerHeight/2, window.innerWidth/2, window.innerHeight/2, 'sky').setScale(2.3);
 
     citybackground = this.add.tileSprite(window.innerWidth/2,window.innerHeight/2 , window.innerWidth * 1.20, window.innerHeight, 'citybackground').setScale(0.85);
+
+    bg = this.add.tileSprite(1100, 472, 0, 0, 'background').setScale(0.45);
+
 
     // building1 = this.add.tileSprite(90, window.innerHeight/2 +90, window.innerWidth * 2, window.innerHeight /2 ,'building1').setScale(1);
     // building2 = this.add.sprite(window.innerWidth/2 + 200, window.innerHeight/2 - 20 ,'building2').setScale(0.40);
@@ -115,7 +99,7 @@ update ( time, delta) {
 
   // animation
   citybackground.tilePositionX += 2 * speedFactor;
-  // building1.tilePositionX += 1 * speedFactor;
+  bg.tilePositionX += 2 * speedFactor;
   obstacle.x -= 4 * speedFactor;
 
 
