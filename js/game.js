@@ -1,7 +1,9 @@
+const width = 1200;
+const height = 800;
 let config = {
      type: Phaser.AUTO,
-     width: window.innerWidth,
-     height: window.innerHeight,
+     width: width,
+     height: height,
      physics: {
        default: 'arcade',
        arcade: {
