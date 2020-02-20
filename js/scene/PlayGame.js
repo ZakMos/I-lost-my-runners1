@@ -3,40 +3,16 @@
     super({key: "PlayGame"});
   }
 
-
 preload () {
     this.load.audio('gameAudio', ['assets/audio/game.mp3']);
-    this.load.image('background', 'assets/Background/Sky.png');
+    this.load.image('sky', 'assets/Background/Sky.png');
+    this.load.image('background', 'assets/Background/citybackground5.png');
     this.load.image('citybackground', 'assets/Background/citybackground2.png');
-    // this.load.image('cloud1', 'assets/Export/cloud1.png');
-    this.load.image('cloud1', 'assets/Background/cloud1.png');
-    this.load.image('cloud2', 'assets/Background/cloud2.png');
-    this.load.image('cloud3', 'assets/Background/cloud3.png');
-    this.load.image('cloud4', 'assets/Background/cloud4.png');
-    this.load.image('cloud5', 'assets/Background/cloud5.png');
-    this.load.image('cloud6', 'assets/Background/cloud6.png');
-    this.load.image('building1', 'assets/Background/building1.png');
-    this.load.image('building2', 'assets/Background/building2.png');
-    this.load.image('building3', 'assets/Background/building3.png');
-    this.load.image('building4', 'assets/Background/building4.png');
-    this.load.image('building5', 'assets/Background/building5.png');
-    this.load.image('building6', 'assets/Background/building6.png');
-    this.load.image('building7', 'assets/Background/building7.png');
-    this.load.image('building8', 'assets/Background/building8.png');
-    this.load.image('building9', 'assets/Background/building9.png');
-    this.load.image('building10', 'assets/Background/building10.png');
-    this.load.image('building11', 'assets/Background/building11.png');
-    this.load.image('building12', 'assets/Background/building12.png');
-    this.load.image('building13', 'assets/Background/building13.png');
-    this.load.image('building14', 'assets/Background/building14.png');
-    this.load.image('building15', 'assets/Background/building15.png');
-    this.load.image('building16', 'assets/Background/building16.png');
-    this.load.image('ground', 'assets/Background/floorcopy.png');
-    this.load.image('tiles', 'assets/Export/tile_2.png');
-    this.load.spritesheet('dude','assets/Running/runningsprite.png',
-      { frameWidth: 627.5, frameHeight: 447 });
+    this.load.image('ground', 'assets/Background/floorcopy1.png');
+    this.load.spritesheet('player','assets/Running/runningsprite1.png',
+      { frameWidth: 336, frameHeight: 447 });
     this.load.image('small', 'assets/small.png');
-    this.load.image('long', 'assets/long.png');
+    this.load.image('long', 'assets/webup_logo1.png');
     this.load.image('high', 'assets/high.png');
   }
 
@@ -46,54 +22,50 @@ create () {
   // soundFX.play();
 
     ///=========================SKY=======================///
-    bg = this.add.tileSprite(window.innerWidth/2, window.innerHeight/2, window.innerWidth/2, window.innerHeight/2, 'background').setScale(2.3);
-    citybackground = this.add.sprite(window.innerWidth/2,window.innerHeight/2 + 25 , 'citybackground').setScale(0.85);
-    cloud1 = this.add.tileSprite(0,0, 'cloud1').setScale(0.25);
-    building1 = this.add.sprite(90, window.innerHeight/2 + 90 ,'building1').setScale(0.40);
-    building2 = this.add.sprite(window.innerWidth/2 + 200, window.innerHeight/2 - 20 ,'building2').setScale(0.40);
-    building3 = this.add.sprite(window.innerWidth/2 + 350, window.innerHeight/2 + 90 ,'building3').setScale(0.40);
-    building4 = this.add.sprite(window.innerWidth/2 + 500, window.innerHeight/2 + 100 ,'building4').setScale(0.40);
-    building5 = this.add.sprite(window.innerWidth/2 + 190, window.innerHeight/2 +150 ,'building5').setScale(0.5);
-    building16 = this.add.sprite(window.innerWidth/2, window.innerHeight/2 + 175 ,'building16').setScale(0.5);
+    sky = this.add.tileSprite(width/2, height/2, width/2, height/2, 'sky').setScale(2.3);
+
+    citybackground = this.add.tileSprite(width/2,height/2 , width * 1.20, height, 'citybackground').setScale(0.85);
+
+    bg = this.add.tileSprite(width/2, height/2 +102, 0, 0, 'background').setScale(0.85);
 
     ///=========================Player=======================///
-      player = this.physics.add.sprite(window.innerWidth / 3, window.innerHeight - 170, 'dude');
+      player = this.physics.add.sprite(width / 10, height - 170, 'player');
       player.setCollideWorldBounds(true);
       player.body.setGravityY(300);
       player.setScale(0.25)
 
       this.anims.create({
        key: 'right',
-       frames: this.anims.generateFrameNumbers('dude', { start: 8, end: 17 }),
-       frameRate: 9,
+       frames: this.anims.generateFrameNumbers('player', { start: 0, end: 9 }),
+       frameRate: 15,
        repeat: -1
-     });
-
+      });
+      this.anims.create({
+      key: 'jump',
+      frames: this.anims.generateFrameNumbers('player', { start: 14, end: 14 }),
+      });
 
      ///=========================Ground=======================///
      platforms = this.physics.add.staticGroup();
-     platforms.create(window.innerWidth/2, window.innerHeight -45 , 'ground').setScale(0.45).refreshBody();
-
-
+     platforms.create(width/2, height -45 , 'ground').setScale(0.45).refreshBody();
 
      ///=========================Obstacle=======================///
-
-
      this.makeObstacle();
 
-
      ///========================= Score =======================///
-
      // Display the score in the top left corner
      // Parameters: x position, y position, text, style
      scoreText = this.add.text(50, 20, 'score: ' + score, { font: '30px Arial', fill: '#000'});
 
      ///========================= Cursors =======================///
      cursors = this.input.keyboard.createCursorKeys();
-
    }
 
 update ( time, delta) {
+  if(gameOver) {
+     this.scene.start('GameOver');
+   }
+
   score = parseFloat((score + 0.04).toFixed(2));
   scoreText.setText( 'score: '+ Math.floor(score));
   if (score % 25 === 0){
@@ -103,19 +75,23 @@ update ( time, delta) {
   this.physics.add.collider(platforms, obstacle);
   this.physics.add.collider(player, obstacle, this.gameOver, null, this);
 
+  // animation
+  citybackground.tilePositionX += 2 * speedFactor;
   bg.tilePositionX += 2 * speedFactor;
-  cloud1.tilePositionX += 1 * speedFactor;
   obstacle.x -= 4 * speedFactor;
 
   if(obstacle.x < -50) {
     this.makeObstacle()
   }
 
-  player.anims.play('right', true);
-
+  if(player.anims.play('right', true)){
+      player.anims.play('right', true);
+    } else if(cursors.up.isDown && player.anims.play('right', true)){
+      player.anims.play('jump', true);
+      player.anims.play('right', false)
+    }
     if ((cursors.up.isDown || cursors.space.isDown) && player.body.touching.down && timer < 330)
-       {  player.body.velocity.y = -450;    }
-
+       {  player.body.velocity.y = -450    }
   };
 
   makeObstacle(){
@@ -136,11 +112,14 @@ update ( time, delta) {
 
     const chosen = obstacleArray[Phaser.Math.Between(0, obstacleArray.length -1)];
 
-    obstacle = this.physics.add.sprite(window.innerWidth, window.innerHeight - chosen.height, chosen.name );
+    obstacle = this.physics.add.sprite(width, height - chosen.height, chosen.name );
   }
 
   gameOver(){
-    this.scene.pause();
-    // this.scene.start('GameOver');
+    this.physics.pause();
+    player.setTint(0xff0000);
+    player.anims.play('right');
+    gameOver = true;
+    speedFactor = 1;
   }
 }

@@ -3,6 +3,13 @@ html {
   min-height: 97%;
 }
 
+body {
+  width: 100%;
+  background: url("assets/Background/tv1.png");
+  background-size: 1900px 910px;
+  background-repeat: no-repeat;
+  margin-left: -130px;
+}
 
 .footer {
     position: absolute;
@@ -11,4 +18,10 @@ html {
     height: 20px;
     line-height: 20px;
     text-align: center;
+    color: white;
+}
+
+canvas {
+  display: block;
+  margin: auto;
 }

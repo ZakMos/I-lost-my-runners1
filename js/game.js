@@ -1,18 +1,21 @@
+const width = 1200;
+const height = 800;
 let config = {
      type: Phaser.AUTO,
-     width: window.innerWidth,
-     height: window.innerHeight,
+     width: width,
+     height: height,
      physics: {
        default: 'arcade',
        arcade: {
          gravity: { y: 200 },
-         debug: true
+         debug: false
        }
      },
      parent: 'phaser-example',
-     scene: [ Start, PlayGame ]
+     scene: [ Start, PlayGame, GameOver ]
  };
   let soundFX;
+  let sky;
   let bg;
   let rule;
   let ruleDescription;
@@ -37,6 +40,12 @@ let config = {
   let building5;
   let building16;
   let speedFactor = 1;
+  let gameOver;
+  let gameOverText;
+  let gameOverScoreText;
+  let highScore = 0;
+  let highScoreText;
+  let playAgain;
 
   // let arrowUp;
 

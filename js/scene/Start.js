@@ -13,7 +13,7 @@ class Start extends Phaser.Scene {
     this.load.image('cloud3', 'assets/Export/cloud3.png');
     this.load.image('arrow', 'assets/arrow-right.png');
     this.load.image('leftarrow', 'assets/left-arrow.png');
-    // this.load.image('arrowup', 'assets/arrow-up.png');
+    this.load.image('webup', 'assets/webup_logo.jpg');
   }
 
   create(){
@@ -23,17 +23,17 @@ class Start extends Phaser.Scene {
     // soundFX.play();
 
     ///=========================Background=======================///
-    bg = this.add.tileSprite(window.innerWidth/2,window.innerHeight/2, window.innerWidth/2,window.innerHeight/2, 'bg').setScale(2);
+    bg = this.add.tileSprite(width/2,height/2, width/2,height/2, 'bg').setScale(2);
     cloud1= this.add.sprite(75,80, 'cloud1');
     cloud1= this.add.sprite(1400,100, 'cloud3');
-
+    this.webup= this.add.sprite(600,150, 'webup');
+    this.webup.setScale(0.2);
 
     ///=========================Auto resize=======================///
-
     window.addEventListener('resize', resize);
     resize();
     function resize() {
-        var canvas = game.canvas, width = window.innerWidth, height = window.innerHeight;
+        var canvas = game.canvas, width = width, height = height;
         var wratio = width / height, ratio = canvas.width / canvas.height;
 
         if (wratio < ratio) {
@@ -46,15 +46,13 @@ class Start extends Phaser.Scene {
     };
 
     ///=========================Rules =======================///
-    ruleDescription = this.add.text(window.innerWidth/2 - 380, 440, 'Use the right arrow to begin running and the spacebar or up key to jump.' ,  { font: '25px Arial', boundsAlignH: "center", fill: '#000'});
+    ruleDescription = this.add.text(width/2 - 380, height/2 +150, 'Use the right arrow to begin running and the spacebar or up key to jump.' ,  { font: '25px Arial', boundsAlignH: "center", fill: '#000'});
 
-    arrowRight= this.add.sprite(window.innerWidth/2+ 330,window.innerHeight/2,  'arrow').setScale(0.26);
-    arrowLeft= this.add.sprite(window.innerWidth/2-330,window.innerHeight/2,  'leftarrow').setScale(0.25);
-
-
+    arrowRight= this.add.sprite(width/2+ 330,height/2,  'arrow').setScale(0.26);
+    arrowLeft= this.add.sprite(width/2-330,height/2,  'leftarrow').setScale(0.25);
 
     ///=========================Button=======================///
-    this.startButton = this.add.image(window.innerWidth/2,window.innerHeight/2,'start').setScale(1.25);
+    this.startButton = this.add.image(width/2,height/2,'start').setScale(1.25);
     this.startButton.setInteractive();
     this.input.on('gameobjectdown', this.onObjectClicked)
     }
