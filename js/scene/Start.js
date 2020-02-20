@@ -6,14 +6,14 @@ class Start extends Phaser.Scene {
 
   preload(){
     this.load.audio('startAudio', ['assets/audio/startAudio.mp3']);
-    this.load.image('bg', 'assets/background2.png');
-    this.load.image('start', 'assets/start-start.png');
-    this.load.image('cloud1', 'assets/Export/cloud1.png');
-    this.load.image('cloud2', 'assets/Export/cloud2.png');
-    this.load.image('cloud3', 'assets/Export/cloud3.png');
-    this.load.image('arrow', 'assets/arrow-right.png');
-    this.load.image('leftarrow', 'assets/left-arrow.png');
-    this.load.image('webup', 'assets/webup_logo.jpg');
+    this.load.image('bg', 'assets/Start/background2.png');
+    this.load.image('start', 'assets/Start/start-start.png');
+    this.load.image('cloud1', 'assets/Start/cloud1.png');
+    this.load.image('cloud2', 'assets/Start/cloud2.png');
+    this.load.image('cloud3', 'assets/Start/cloud3.png');
+    this.load.image('arrow', 'assets/Start/arrow-right.png');
+    this.load.image('leftarrow', 'assets/Start/left-arrow.png');
+    this.load.image('webup', 'assets/Start/webup_logo.jpg');
   }
 
   create(){
@@ -24,9 +24,10 @@ class Start extends Phaser.Scene {
 
     ///=========================Background=======================///
     bg = this.add.tileSprite(width/2,height/2, width/2,height/2, 'bg').setScale(2);
-    cloud1= this.add.sprite(75,80, 'cloud1');
-    cloud1= this.add.sprite(1400,100, 'cloud3');
-    this.webup= this.add.sprite(600,150, 'webup');
+    cloud1= this.add.sprite(800,150, 'cloud1');
+    cloud2= this.add.sprite(200,150, 'cloud2');
+    cloud3= this.add.sprite(1400,200, 'cloud3');
+    this.webup= this.add.sprite(900,670, 'webup');
     this.webup.setScale(0.2);
 
     ///=========================Auto resize=======================///
