@@ -1,4 +1,4 @@
-const width = 1200;
+const width = 1785;
 const height = 800;
 let config = {
      type: Phaser.AUTO,
@@ -42,10 +42,10 @@ let config = {
   let speedFactor = 1;
   let gameOver;
   let gameOverText;
+  let gameOverScoreText
   let highScore = 0;
   let highScoreText;
   let playAgain;
-
-  // let arrowUp;
+  let footerText;
 
 let game = new Phaser.Game(config);
