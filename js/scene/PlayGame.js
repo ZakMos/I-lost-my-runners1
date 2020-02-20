@@ -5,14 +5,14 @@
 
 preload () {
     this.load.audio('gameAudio', ['assets/audio/game.mp3']);
-    this.load.image('sky', 'assets/Background/Sky.png');
-    this.load.image('background', 'assets/Background/citybackground5.png');
-    this.load.image('citybackground', 'assets/Background/citybackground2.png');
-    this.load.image('ground', 'assets/Background/floorcopy1.png');
-    this.load.spritesheet('player','assets/Running/dude.png', { frameWidth: 32, frameHeight: 48 });
-    this.load.image('small', 'assets/small.png');
-    this.load.image('long', 'assets/webup_logo1.png');
-    this.load.image('high', 'assets/high.png');
+    this.load.image('sky', 'assets/PlayGame/Sky.png');
+    this.load.image('background', 'assets/PlayGame/citybackground5.png');
+    this.load.image('citybackground', 'assets/PlayGame/citybackground2.png');
+    this.load.image('ground', 'assets/PlayGame/floor.png');
+    this.load.spritesheet('player','assets/PlayGame/dude.png', { frameWidth: 32, frameHeight: 48 });
+    this.load.image('small', 'assets/PlayGame/small.png');
+    this.load.image('long', 'assets/PlayGame/webup_logo.png');
+    this.load.image('high', 'assets/PlayGame/high.png');
   }
 
 create () {
