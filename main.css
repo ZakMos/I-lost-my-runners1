@@ -8,17 +8,14 @@ body {
   background: url("assets/Background/tv1.png");
   background-size: 1900px 910px;
   background-repeat: no-repeat;
-  margin-left: -130px;
-}
 
 .footer {
     position: absolute;
     bottom: 0;
-    width: 100%;
     height: 20px;
     line-height: 20px;
     text-align: center;
-    color: white;
+    color: #fff;
 }
 
 canvas {

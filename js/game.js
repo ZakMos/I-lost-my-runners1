@@ -12,7 +12,7 @@ let config = {
        }
      },
      parent: 'phaser-example',
-     scene: [ Start, PlayGame, GameOver ]
+     scene: [ Start, PlayGame, GameOver]
  };
   let soundFX;
   let sky;
@@ -42,7 +42,6 @@ let config = {
   let speedFactor = 1;
   let gameOver;
   let gameOverText;
-  let gameOverScoreText;
   let highScore = 0;
   let highScoreText;
   let playAgain;
