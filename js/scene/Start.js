@@ -30,32 +30,41 @@ class Start extends Phaser.Scene {
     this.webup.setScale(0.2);
 
     ///=========================Auto resize=======================///
-    window.addEventListener('resize', resize);
-    resize();
-    function resize() {
-        var canvas = game.canvas, width = width, height = height;
-        var wratio = width / height, ratio = canvas.width / canvas.height;
 
-        if (wratio < ratio) {
-            canvas.style.width = width + "px";
-            canvas.style.height = (width / ratio) + "px";
-        } else {
-            canvas.style.width = (height * ratio) + "px";
-            canvas.style.height = height + "px";
-        }
-    };
+    resize();
+    window.addEventListener("resize", resize, false);
+    function resize() {
+    var canvas = document.querySelector("canvas");
+    var windowWidth = window.innerWidth;
+    var windowHeight = window.innerHeight;
+    var windowRatio = windowWidth / windowHeight;
+    var gameRatio = game.config.width / game.config.height;
+
+    if(windowRatio < gameRatio){
+        canvas.style.width = windowWidth + "px";
+        canvas.style.height = (windowWidth / gameRatio) + "px";
+    }
+    else {
+        canvas.style.width = (windowHeight * gameRatio) + "px";
+        canvas.style.height = windowHeight + "px";
+    }
+}
 
     ///=========================Rules =======================///
     ruleDescription = this.add.text(width/2 - 380, height/2 +150, 'Use the right arrow to begin running and the spacebar or up key to jump.' ,  { font: '25px Arial', boundsAlignH: "center", fill: '#000'});
 
     arrowRight= this.add.sprite(width/2+ 330,height/2,  'arrow').setScale(0.26);
     arrowLeft= this.add.sprite(width/2-330,height/2,  'leftarrow').setScale(0.25);
+    footerText = this.add.text(width/2 - 130, height/2 +365, '© 2020 Zakaria Moslim' ,  { font: '25px Arial', boundsAlignH: "center", fill: '#000'});
 
     ///=========================Button=======================///
     this.startButton = this.add.image(width/2,height/2,'start').setScale(1.25);
     this.startButton.setInteractive();
     this.input.on('gameobjectdown', this.onObjectClicked)
     }
+
+    
+
     onObjectClicked(e){
     this.scene.scene.start('PlayGame');
     //for sound
