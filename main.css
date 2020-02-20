@@ -1,24 +1,15 @@
 html {
-  position: relative;
-  min-height: 97%;
-}
-
-body {
-  width: 100%;
-  background: url("assets/Background/tv1.png");
-  background-size: 1900px 910px;
-  background-repeat: no-repeat;
-
-.footer {
-    position: absolute;
-    bottom: 0;
-    height: 20px;
-    line-height: 20px;
-    text-align: center;
-    color: #fff;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  vertical-align: baseline;
 }
 
 canvas {
   display: block;
-  margin: auto;
+  margin: 0;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
 }
