@@ -93,7 +93,7 @@ update ( time, delta) {
       player.anims.play('jump', true);
       player.anims.play('right', false)
     }
-    if ((cursors.up.isDown || cursors.space.isDown) && player.body.touching.down && timer < 330)
+    if ((cursors.up.isDown || cursors.space.isDown || this.game.input.activePointer.isDown) && player.body.touching.down && timer < 330)
        {  player.body.velocity.y = -450    }
   };
 
