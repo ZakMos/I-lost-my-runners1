@@ -6,11 +6,13 @@ class GameOver extends Phaser.Scene{
 
     this.load.audio('GameOverAudio', ['assets/audio/gameOver.mp3']);
     this.load.image('playAgain', 'assets/play-again.png');
+
   }
 
   create(){
     this.soundFX = this.sound.add('GameOverAudio', { loop: 'true'});
     gameOverText = this.add.text(width/2 -350, height/2 + 100, 'Game Over' ,  { font: '150px Arial', boundsAlignH: "center", fill: '#f00'});
+    footerText = this.add.text(width/2 - 130, height/2 +365, '© 2020 Zakaria Moslim' ,  { font: '25px Arial', boundsAlignH: "center", fill: '#fff'});
 
     gameOverScoreText = this.add.text(20, 40, 'Your Score: ' + Math.floor(score), {
       font: '25px Arial',
