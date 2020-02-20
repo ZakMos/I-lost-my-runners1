@@ -9,8 +9,7 @@ preload () {
     this.load.image('background', 'assets/Background/citybackground5.png');
     this.load.image('citybackground', 'assets/Background/citybackground2.png');
     this.load.image('ground', 'assets/Background/floorcopy1.png');
-    this.load.spritesheet('player','assets/Running/runningsprite1.png',
-      { frameWidth: 336, frameHeight: 447 });
+    this.load.spritesheet('player','assets/Running/dude.png', { frameWidth: 32, frameHeight: 48 });
     this.load.image('small', 'assets/small.png');
     this.load.image('long', 'assets/webup_logo1.png');
     this.load.image('high', 'assets/high.png');
@@ -28,24 +27,28 @@ create () {
 
     bg = this.add.tileSprite(width/2, height/2 +102, 0, 0, 'background').setScale(0.85);
 
-    ///=========================Player=======================///
+  ///=========================Player=======================///
       player = this.physics.add.sprite(width / 10, height - 170, 'player');
       player.setCollideWorldBounds(true);
       player.body.setGravityY(300);
-      player.setScale(0.25)
+      player.setScale(3)
 
       this.anims.create({
        key: 'right',
-       frames: this.anims.generateFrameNumbers('player', { start: 0, end: 9 }),
+       frames: this.anims.generateFrameNumbers('player', { start: 5, end: 8 }),
        frameRate: 15,
        repeat: -1
       });
       this.anims.create({
       key: 'jump',
-      frames: this.anims.generateFrameNumbers('player', { start: 14, end: 14 }),
+      frames: this.anims.generateFrameNumbers('player', { start: 0, end: 0 }),
       });
 
      ///=========================Ground=======================///
+    //  platforms = this.physics.add.sprite(width/2, height - 45, 'ground');
+    //  platforms.setScale(0.45);
+    //   platforms.setCollideWorldBounds(true);
+
      platforms = this.physics.add.staticGroup();
      platforms.create(width/2, height -45 , 'ground').setScale(0.45).refreshBody();
 
@@ -55,7 +58,7 @@ create () {
      ///========================= Score =======================///
      // Display the score in the top left corner
      // Parameters: x position, y position, text, style
-     scoreText = this.add.text(50, 20, 'score: ' + score, { font: '30px Arial', fill: '#000'});
+     scoreText = this.add.text(20, 40, 'score: ' + score, { font: '30px Arial', fill: '#fff'});
 
      ///========================= Cursors =======================///
      cursors = this.input.keyboard.createCursorKeys();
@@ -68,8 +71,8 @@ update ( time, delta) {
 
   score = parseFloat((score + 0.04).toFixed(2));
   scoreText.setText( 'score: '+ Math.floor(score));
-  if (score % 25 === 0){
-    speedFactor += 0.25
+  if (score % 15 === 0){
+    speedFactor += 0.35
   }
   this.physics.add.collider(player, platforms);
   this.physics.add.collider(platforms, obstacle);
