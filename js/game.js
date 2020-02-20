@@ -21,6 +21,8 @@ let config = {
   let ruleDescription;
   let startButton;
   let cloud1;
+  let cloud2;
+  let cloud3;
   let player;
   let platforms;
   let obstacle;
